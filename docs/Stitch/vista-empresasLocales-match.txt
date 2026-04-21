@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Match Feed | Chancay Gateway</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700;800;900&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-background": "#131d24",
+                        "tertiary": "#3f3828",
+                        "outline-variant": "#c4c7cb",
+                        "on-secondary-fixed-variant": "#930010",
+                        "inverse-on-surface": "#e8f2fd",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#fffbff",
+                        "on-tertiary-fixed-variant": "#4d4635",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#d9e4ef",
+                        "surface-container": "#e5effa",
+                        "secondary-fixed-dim": "#ffb3ac",
+                        "secondary-container": "#db3232",
+                        "surface": "#f6f9ff",
+                        "surface-container-highest": "#d9e4ef",
+                        "tertiary-fixed-dim": "#d1c5ae",
+                        "tertiary-container": "#574f3d",
+                        "surface-container-high": "#dfe9f4",
+                        "outline": "#74777b",
+                        "on-secondary-fixed": "#410003",
+                        "on-primary-fixed-variant": "#3e4851",
+                        "background": "#f6f9ff",
+                        "primary-fixed-dim": "#bdc8d2",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#201b0c",
+                        "on-surface": "#131d24",
+                        "inverse-surface": "#28323a",
+                        "on-surface-variant": "#44474b",
+                        "on-primary": "#ffffff",
+                        "primary": "#303a43",
+                        "surface-variant": "#d9e4ef",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#ffdad6",
+                        "surface-container-low": "#ebf5ff",
+                        "surface-bright": "#f6f9ff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#b9c3ce",
+                        "inverse-primary": "#bdc8d2",
+                        "primary-container": "#47515a",
+                        "secondary": "#b7131d",
+                        "on-tertiary-container": "#ccc1aa",
+                        "surface-tint": "#556069",
+                        "tertiary-fixed": "#ede1c9",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#d1dbe6",
+                        "on-primary-fixed": "#131d24"
+                    },
+                    fontFamily: {
+                        "headline": ["Public Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full flex justify-between items-center px-8 py-4 max-w-full mx-auto bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-50 shadow-sm dark:shadow-none">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-slate-800 dark:text-white font-headline">Chancay Gateway</span>
+<div class="hidden md:flex gap-6 items-center">
+<a class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors font-label text-[0.6875rem] tracking-widest uppercase" href="#">ZEEP Opportunities</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors font-label text-[0.6875rem] tracking-widest uppercase" href="#">Operators Portal</a>
+<a class="text-red-700 dark:text-red-500 font-semibold border-b-2 border-red-700 dark:border-red-500 pb-1 font-label text-[0.6875rem] tracking-widest uppercase" href="#">Match Feed</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors font-label text-[0.6875rem] tracking-widest uppercase" href="#">AI Assistant</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors font-label text-[0.6875rem] tracking-widest uppercase" href="#">Service Finder</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex gap-2">
+<button class="p-2 hover:bg-slate-100/50 rounded-full transition-all duration-200"><span class="material-symbols-outlined text-on-surface-variant">notifications</span></button>
+<button class="p-2 hover:bg-slate-100/50 rounded-full transition-all duration-200"><span class="material-symbols-outlined text-on-surface-variant">language</span></button>
+<button class="p-2 hover:bg-slate-100/50 rounded-full transition-all duration-200"><span class="material-symbols-outlined text-on-surface-variant">account_circle</span></button>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-md font-medium text-sm transition-transform active:scale-95">Sign In</button>
+</div>
+</nav>
+<div class="flex min-h-screen pt-20">
+<!-- Side Navigation Bar -->
+<aside class="hidden lg:flex flex-col fixed left-0 top-0 h-full py-6 w-64 bg-slate-100 dark:bg-slate-950 border-r border-slate-200/15 z-40">
+<div class="px-6 mb-10 mt-16">
+<h2 class="text-lg font-black text-slate-900 dark:text-white font-headline">Sovereign Gateway</h2>
+<p class="text-[0.6875rem] font-label tracking-widest text-slate-500 uppercase">Global Logistics Hub</p>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-200/30 rounded-r-lg transition-all duration-200 hover:translate-x-1 group" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-200/30 rounded-r-lg transition-all duration-200 hover:translate-x-1 group" href="#">
+<span class="material-symbols-outlined">location_on</span>
+<span class="text-sm font-medium">ZEEP Benefits</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-200/30 rounded-r-lg transition-all duration-200 hover:translate-x-1 group" href="#">
+<span class="material-symbols-outlined">anchor</span>
+<span class="text-sm font-medium">Port Operations</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-slate-200/50 dark:bg-slate-800/50 text-red-700 dark:text-red-500 font-bold rounded-r-lg transition-all duration-200 hover:translate-x-1 group" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">handshake</span>
+<span class="text-sm font-medium">Smart Match</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-200/30 rounded-r-lg transition-all duration-200 hover:translate-x-1 group" href="#">
+<span class="material-symbols-outlined">gavel</span>
+<span class="text-sm font-medium">Legal AI</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-200/30 rounded-r-lg transition-all duration-200 hover:translate-x-1 group" href="#">
+<span class="material-symbols-outlined">business_center</span>
+<span class="text-sm font-medium">Services</span>
+</a>
+</nav>
+<div class="px-3 pt-6 border-t border-slate-200/15 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200/30 rounded-r-lg transition-all" href="#"><span class="material-symbols-outlined text-sm">settings</span><span class="text-sm">Settings</span></a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200/30 rounded-r-lg transition-all" href="#"><span class="material-symbols-outlined text-sm">help_outline</span><span class="text-sm">Support</span></a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 lg:ml-64 p-8 bg-surface">
+<!-- Header Section -->
+<header class="mb-12 max-w-6xl">
+<div class="flex justify-between items-end gap-6 mb-4">
+<div class="space-y-2">
+<span class="font-label text-secondary text-[0.6875rem] font-bold tracking-[0.2em] uppercase">Intelligence Engine</span>
+<h1 class="text-5xl font-extrabold font-headline tracking-tight text-primary leading-tight">Match Feed</h1>
+</div>
+<div class="flex items-center gap-4 pb-1">
+<div class="flex flex-col items-end">
+<span class="text-xs font-bold font-label text-slate-400 uppercase tracking-widest">Active Alerts</span>
+<span class="text-xl font-bold text-secondary">24 Matches Found</span>
+</div>
+</div>
+</div>
+<p class="text-lg text-on-surface-variant max-w-2xl leading-relaxed">
+                    Personalized opportunities from global logistics entities mapped to your Peruvian service profile.
+                </p>
+</header>
+<!-- Layout Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-8 max-w-7xl">
+<!-- Match Feed Column -->
+<div class="xl:col-span-8 space-y-6">
+<!-- Search & Filter Bar -->
+<div class="bg-surface-container-low p-4 flex flex-wrap gap-4 items-center">
+<div class="flex-1 min-w-[240px] relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-white border-none text-sm py-2.5 pl-10 focus:ring-1 focus:ring-primary" placeholder="Search by sector, country or project scale..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="bg-white px-4 py-2 text-xs font-bold font-label uppercase tracking-widest flex items-center gap-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-sm">tune</span> Filter
+                            </button>
+<button class="bg-white px-4 py-2 text-xs font-bold font-label uppercase tracking-widest flex items-center gap-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-sm">sort</span> Relevance
+                            </button>
+</div>
+</div>
+<!-- Match Cards -->
+<div class="space-y-6">
+<!-- Card 1: High Match -->
+<div class="bg-surface-container-lowest group relative overflow-hidden transition-all duration-300 hover:shadow-[0_12px_32px_rgba(19,29,36,0.06)]">
+<div class="absolute top-0 left-0 w-1 h-full bg-secondary"></div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 bg-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">transportation</span>
+</div>
+<div>
+<h3 class="text-xl font-bold font-headline text-primary">Maritime Cold Chain Expansion</h3>
+<p class="text-xs text-on-surface-variant font-label uppercase tracking-widest">Global Logistics Corp • Hamburg, Germany</p>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="bg-secondary/10 text-secondary text-[0.625rem] font-black font-label px-3 py-1 uppercase tracking-widest mb-1">98% Match</span>
+<span class="text-xs text-outline font-medium">Posted 2h ago</span>
+</div>
+</div>
+<p class="text-on-surface-variant mb-6 leading-relaxed">
+                                    Seeking specialized Peruvian partners for integrated refrigerated transport between Chancay and Northern EU ports. Requirement includes ISO 14001 certification and terminal handling capabilities.
+                                </p>
+<div class="flex flex-wrap gap-2 mb-8">
+<span class="px-3 py-1 bg-surface-variant text-[0.6875rem] font-bold font-label uppercase tracking-wider text-primary">Refrigerated Logistics</span>
+<span class="px-3 py-1 bg-surface-variant text-[0.6875rem] font-bold font-label uppercase tracking-wider text-primary">Chancay Hub</span>
+<span class="px-3 py-1 bg-surface-variant text-[0.6875rem] font-bold font-label uppercase tracking-wider text-primary">EU Standards</span>
+</div>
+<div class="flex justify-between items-center border-t border-outline-variant/10 pt-6">
+<div class="flex -space-x-2">
+<img alt="Officer" class="w-8 h-8 rounded-full border-2 border-white object-cover" data-alt="professional businessman in suit looking confident" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDz0PrgsntHMIFWmIgFHjlOdS9wjW59ECJaRooFaDrECYLYcxUU3VeN9BKdVRYezQjLbVHTomrNHi6cbRI9BDfRVGvrJF81ybNqXJfcWYDPe53bthbpOe-r7lrKy-2DVrdtv5aAF0iaAd9bhE6tXQlQe_oaGVnyeFSxD2KTvC9QsOCCxFUbsDegjeMApMyMso7FNsWTFPXEpbYVzVxkN-oIl-gJ4aLhjhqwGzxCJw1Pqs8cD-alhL859AhQ9wQK5wYnpaBdff0JxMM"/>
+<img alt="Analyst" class="w-8 h-8 rounded-full border-2 border-white object-cover" data-alt="professional businesswoman in professional attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAE8BheuMUD5XYejPM_kvSB2Ak06oIocOUW5r7SM7nPrMGvCsUVfZLazqzBmuEpomj2Gl7Ke1367araVaShlBKJ0ARsu7OuNvgzXTCGijcuxWYwoBbgQorUOALGYdToZ4QAhbp694pzPvm6XLo4AvnwE2zEQNHRwaqJN5Upt-EosDkMN_bQuGb8187N1ZDmNCch8KcrLENB246UyTXTPSU0hMp5_QpZo01-w7jcSLxXOuk5LD27WH2Uzd4OXRRyzqEmXqp8sJzBq9I"/>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-slate-200 flex items-center justify-center text-[10px] font-bold text-slate-600">+4</div>
+</div>
+<div class="flex gap-4">
+<button class="text-xs font-bold font-label uppercase tracking-widest text-primary hover:text-secondary transition-colors">Save for Later</button>
+<button class="bg-primary text-on-primary px-6 py-2.5 text-xs font-bold font-label uppercase tracking-widest transition-transform active:scale-95">Initiate Connection</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2: Strategic Match -->
+<div class="bg-surface-container-lowest group relative overflow-hidden transition-all duration-300 hover:shadow-[0_12px_32px_rgba(19,29,36,0.06)]">
+<div class="absolute top-0 left-0 w-1 h-full bg-tertiary"></div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 bg-tertiary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">engineering</span>
+</div>
+<div>
+<h3 class="text-xl font-bold font-headline text-primary">Phase 2 Terminal Automation</h3>
+<p class="text-xs text-on-surface-variant font-label uppercase tracking-widest">Pacific Rim Infra • Shanghai, China</p>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="bg-tertiary/10 text-tertiary text-[0.625rem] font-black font-label px-3 py-1 uppercase tracking-widest mb-1">82% Match</span>
+<span class="text-xs text-outline font-medium">Posted 6h ago</span>
+</div>
+</div>
+<p class="text-on-surface-variant mb-6 leading-relaxed">
+                                    Procurement project for local engineering firms to support installation and maintenance of automated stacking cranes and AGVs at the Chancay terminal.
+                                </p>
+<div class="flex flex-wrap gap-2 mb-8">
+<span class="px-3 py-1 bg-surface-variant text-[0.6875rem] font-bold font-label uppercase tracking-wider text-primary">Automation</span>
+<span class="px-3 py-1 bg-surface-variant text-[0.6875rem] font-bold font-label uppercase tracking-wider text-primary">Civil Eng</span>
+</div>
+<div class="flex justify-between items-center border-t border-outline-variant/10 pt-6">
+<div class="flex items-center gap-2 text-xs text-outline font-medium italic">
+<span class="material-symbols-outlined text-sm">visibility</span> 124 companies viewing
+                                    </div>
+<div class="flex gap-4">
+<button class="text-xs font-bold font-label uppercase tracking-widest text-primary hover:text-secondary transition-colors">View Brief</button>
+<button class="bg-primary text-on-primary px-6 py-2.5 text-xs font-bold font-label uppercase tracking-widest transition-transform active:scale-95">Inquire Access</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 3: Growing Match -->
+<div class="bg-surface-container-lowest group relative overflow-hidden transition-all duration-300 hover:shadow-[0_12px_32px_rgba(19,29,36,0.06)]">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary-container"></div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">agriculture</span>
+</div>
+<div>
+<h3 class="text-xl font-bold font-headline text-primary">Superfood Export Aggregator</h3>
+<p class="text-xs text-on-surface-variant font-label uppercase tracking-widest">Andean Harvest Solutions • Lima, Peru</p>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="bg-slate-200 text-slate-600 text-[0.625rem] font-black font-label px-3 py-1 uppercase tracking-widest mb-1">75% Match</span>
+<span class="text-xs text-outline font-medium">Posted 1d ago</span>
+</div>
+</div>
+<p class="text-on-surface-variant mb-6 leading-relaxed">
+                                    Collaborative project to aggregate small-scale produce for high-volume export through the new Gateway. Focused on Blueberries and Avocado logistics.
+                                </p>
+<div class="flex justify-between items-center border-t border-outline-variant/10 pt-6">
+<div class="text-xs text-primary font-bold font-label uppercase tracking-widest">Local Consortium Project</div>
+<div class="flex gap-4">
+<button class="bg-primary text-on-primary px-6 py-2.5 text-xs font-bold font-label uppercase tracking-widest transition-transform active:scale-95">Join Consortium</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar Controls Column -->
+<div class="xl:col-span-4 space-y-8">
+<!-- Alert Settings -->
+<section class="bg-white p-8">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-secondary">mail</span>
+<h2 class="text-sm font-black font-label uppercase tracking-[0.2em] text-primary">Email Alerts</h2>
+</div>
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-bold text-primary">Instant Match Alerts</p>
+<p class="text-[0.6875rem] text-on-surface-variant">Notify me when a 90%+ match is found</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-bold text-primary">Weekly Opportunity Digest</p>
+<p class="text-[0.6875rem] text-on-surface-variant">Curated list of all relevant gateway projects</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between opacity-50">
+<div>
+<p class="text-sm font-bold text-primary">Competitor Activity</p>
+<p class="text-[0.6875rem] text-on-surface-variant">Requires Premium Portal access</p>
+</div>
+<label class="relative inline-flex items-center cursor-not-allowed">
+<input class="sr-only peer" disabled="" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+</label>
+</div>
+</div>
+<button class="w-full mt-8 border border-outline-variant/30 py-3 text-xs font-bold font-label uppercase tracking-widest text-primary hover:bg-slate-50 transition-colors">
+                            Manage All Notifications
+                        </button>
+</section>
+<!-- Service Profile Pulse -->
+<section class="bg-primary p-8 text-white relative overflow-hidden">
+<div class="absolute -right-10 -bottom-10 opacity-10">
+<span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">hub</span>
+</div>
+<h2 class="text-sm font-black font-label uppercase tracking-[0.2em] mb-6">Service Profile Accuracy</h2>
+<div class="flex items-baseline gap-2 mb-2">
+<span class="text-4xl font-black font-headline tracking-tighter">84%</span>
+<span class="text-primary-container font-bold text-xs">+12% this month</span>
+</div>
+<div class="w-full bg-white/10 h-1.5 mb-6">
+<div class="bg-secondary h-full w-[84%]"></div>
+</div>
+<p class="text-[0.6875rem] leading-relaxed text-slate-300 mb-6 uppercase tracking-wider font-bold">
+                            Completing your Terminal Security certification will unlock 15 additional project matches.
+                        </p>
+<button class="w-full bg-white text-primary py-3 text-xs font-bold font-label uppercase tracking-widest transition-transform active:scale-95">
+                            Update Profile Data
+                        </button>
+</section>
+<!-- Visual Callout: Collaboration -->
+<div class="relative h-64 w-full bg-slate-800">
+<img alt="Collaboration Visual" class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-60" data-alt="professional modern harbor construction at twilight with golden lights and deep blue sky reflecting on calm water" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD93bGnTzcqq1V01S39hJSwfdoPm4CqQVhEx2oxKxv1zdovahPzv_gz7D0SLtPr8VMUFWapoy5W1TmgECft8eypWQ335Diqv6C-aes8ceKC8I4dmbzcU_ImPr5kWUOnXmPBILny5K7s7XVb2HpIYk-AH06iqMDTg2-LNdTjwNtjIj4iKrv1aQq9gbhdLXjWvf_P5pQ1MEFEBg7PFeRZ0yABEcU8spDF6ATtaBkDoASI_AvePGTyHu6oRdW4GzBg_TPIZ1NPkPd1KRw"/>
+<div class="absolute inset-0 p-8 flex flex-col justify-end">
+<p class="text-white font-headline text-2xl font-bold leading-tight mb-2">Build Global Alliances</p>
+<p class="text-white/70 text-sm">Join the network of 500+ verified Peruvian exporters connecting with Asia-Pacific markets.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="flex flex-col md:flex-row justify-between items-center gap-4 w-full py-12 px-8 mt-auto bg-slate-900 dark:bg-black text-white">
+<div class="flex flex-col gap-2">
+<span class="text-slate-400 font-bold font-headline">Chancay Gateway</span>
+<p class="font-body text-[0.875rem] text-slate-400">© 2024 Chancay Megaport Authority. Institutional Excellence &amp; Global Logistics.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="font-label text-[0.6875rem] uppercase tracking-widest text-slate-400 hover:text-red-500 transition-colors" href="#">Privacy Policy</a>
+<a class="font-label text-[0.6875rem] uppercase tracking-widest text-slate-400 hover:text-red-500 transition-colors" href="#">Terms of Service</a>
+<a class="font-label text-[0.6875rem] uppercase tracking-widest text-slate-400 hover:text-red-500 transition-colors" href="#">MINCETUR Compliance</a>
+<a class="font-label text-[0.6875rem] uppercase tracking-widest text-slate-400 hover:text-red-500 transition-colors" href="#">Contact Support</a>
+</div>
+</footer>
+</body></html>

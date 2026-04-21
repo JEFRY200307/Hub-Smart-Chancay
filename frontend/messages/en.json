@@ -1,0 +1,70 @@
+{
+  "Common": {
+    "title": "P.L.A.I.A.",
+    "subtitle": "Legality, Leasing and Automated Installation Platform",
+    "login": "CIP Access",
+    "signIn": "Sign In",
+    "logout": "Log Out"
+  },
+  "Navigation": {
+    "home": "Home",
+    "about": "About Us",
+    "legal": "Legal Framework",
+    "language": "Language",
+    "dashboard": "Dashboard",
+    "benefits": "ZEEP Benefits",
+    "port": "Port Operations",
+    "match": "Smart Match",
+    "legalAi": "Legal AI",
+    "services": "Services"
+  },
+  "Hero": {
+    "badge": "CIP Lima Technical Support",
+    "title": "Simplify your entry to ZEEP Chancay with AI",
+    "subtitle": "Navigate the technical and legal complexity of South America's largest port hub with artificial intelligence designed by engineers for engineers.",
+    "ctaStart": "[Start Smart Diagnosis (3 min)]",
+    "ctaLegal": "View Legal Framework"
+  },
+  "Stats": {
+    "leadership": "Leadership in the Pacific Rim",
+    "leadershipDesc": "The College of Engineers of Peru - CD Lima guarantees data integrity and compliance with international standards for all companies operating in the Chancay Private Special Economic Zone.",
+    "investment": "Total Investment",
+    "jobs": "Jobs Generated",
+    "compliance": "Legal Compliance",
+    "installedCapacity": "AI Installed Capacity"
+  },
+  "Footer": {
+    "brand": "P.L.A.I.A.",
+    "copyright": "© 2024 College of Engineers of Peru - Lima. P.L.A.I.A.: The Institutional Vanguard.",
+    "resources": "Resources",
+    "contact": "Direct Contact",
+    "qualitySeal": "Quality Seal"
+  },
+  "Login": {
+    "institutionalInfrastructure": "Institutional Infrastructure",
+    "visualTitle": "The Sovereign Gateway to South American Trade",
+    "visualSubtitle": "Join the global elite of logistics operators and institutional investors in the world's most strategic maritime hub.",
+    "teuCapacity": "TEU Capacity",
+    "draftDepth": "Draft Depth",
+    "accessTitle": "Institutional Access",
+    "accessSubtitle": "Enter your corporate credentials to manage your port operations or investment portfolio.",
+    "corporateRuc": "Corporate RUC",
+    "password": "Password",
+    "forgotPassword": "Forgot your password?",
+    "secureAccess": "Secure Access",
+    "notAccredited": "Not yet accredited in ZEEP Chancay?",
+    "registerCompany": "Register New Company"
+  },
+  "Onboarding": {
+    "institutionalProfiling": "Institutional Profiling",
+    "step1": "Step 1: Industrial Sector",
+    "progress": "Onboarding Progress",
+    "aiAnalyst": "AI Analyst Active",
+    "welcome": "Institutional Welcome",
+    "aiGreeting": "\"Welcome to the Chancay Special Economic Zone portal. To provide accurate fiscal and logistics projections, I need to understand your operation's profile.\"",
+    "qSector": "Which sector defines your primary operation?",
+    "qMetrics": "Project Metrics & Projections",
+    "qCapital": "Capital Origin",
+    "continue": "Continue to Logistical Assessment"
+  }
+}

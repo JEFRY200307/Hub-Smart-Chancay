@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chancay Gateway | Institutional Access</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700;800;900&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-background": "#131d24",
+              "tertiary": "#3f3828",
+              "outline-variant": "#c4c7cb",
+              "on-secondary-fixed-variant": "#930010",
+              "inverse-on-surface": "#e8f2fd",
+              "on-error": "#ffffff",
+              "on-secondary-container": "#fffbff",
+              "on-tertiary-fixed-variant": "#4d4635",
+              "surface-container-lowest": "#ffffff",
+              "primary-fixed": "#d9e4ef",
+              "surface-container": "#e5effa",
+              "secondary-fixed-dim": "#ffb3ac",
+              "secondary-container": "#db3232",
+              "surface": "#f6f9ff",
+              "surface-container-highest": "#d9e4ef",
+              "tertiary-fixed-dim": "#d1c5ae",
+              "tertiary-container": "#574f3d",
+              "surface-container-high": "#dfe9f4",
+              "outline": "#74777b",
+              "on-secondary-fixed": "#410003",
+              "on-primary-fixed-variant": "#3e4851",
+              "background": "#f6f9ff",
+              "primary-fixed-dim": "#bdc8d2",
+              "on-error-container": "#93000a",
+              "on-tertiary-fixed": "#201b0c",
+              "on-surface": "#131d24",
+              "inverse-surface": "#28323a",
+              "on-surface-variant": "#44474b",
+              "on-primary": "#ffffff",
+              "primary": "#303a43",
+              "surface-variant": "#d9e4ef",
+              "on-tertiary": "#ffffff",
+              "secondary-fixed": "#ffdad6",
+              "surface-container-low": "#ebf5ff",
+              "surface-bright": "#f6f9ff",
+              "on-secondary": "#ffffff",
+              "on-primary-container": "#b9c3ce",
+              "inverse-primary": "#bdc8d2",
+              "primary-container": "#47515a",
+              "secondary": "#b7131d",
+              "on-tertiary-container": "#ccc1aa",
+              "surface-tint": "#556069",
+              "tertiary-fixed": "#ede1c9",
+              "error": "#ba1a1a",
+              "error-container": "#ffdad6",
+              "surface-dim": "#d1dbe6",
+              "on-primary-fixed": "#131d24"
+            },
+            fontFamily: {
+              "headline": ["Public Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.glass-panel {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px)
+    }
+.port-silhouette {
+    background-image: linear-gradient(to top, rgba(48, 58, 67, 0.95), rgba(48, 58, 67, 0.4)), url(https://lh3.googleusercontent.com/aida-public/AB6AXuCyove7XiaGU1QilavNyg3yMBUSLiOIG5-uzWSlfLexXVaIWohoyNOuakRO02dpN9ZnH_8r-0_B-oFiSfjrvpk_p3-Hu78ieE9GlVvlTITva4qn_oIhWJhx2WePuFo2rcG7Dj1AntTVAdv7mvs09oDPJ7A2ioYrh6nF65nMiiT0eqJPjmZ79EmnoAZKPN5H_JbWArNd6lAcerMhDI3b8SkZVOAXwMEbLqluKpfGt8VAIP-zDMDXqkjkYRlVkXSkbe-NtHtzA1LWa_A);
+    background-size: cover;
+    background-position: center
+    }</style>
+</head>
+<body class="bg-surface font-body text-on-surface min-h-screen flex flex-col">
+<!-- Top Navigation (Shell Visibility & Relevance: Linear journey, so minimal brand anchor) -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-8 py-6">
+<div class="text-xl font-bold tracking-tighter text-slate-800 font-headline">
+            Chancay Gateway
+        </div>
+<div class="hidden md:flex gap-8 items-center">
+<span class="text-[0.6875rem] font-label uppercase tracking-widest text-on-surface-variant">Global Logistics Hub</span>
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-xl">language</span>
+<span class="text-xs font-medium">EN</span>
+</div>
+</div>
+</nav>
+<main class="flex-grow flex items-stretch min-h-screen">
+<!-- Visual Anchor: Asymmetrical Design -->
+<section class="hidden lg:flex w-1/2 port-silhouette relative items-end p-16" data-alt="Wide cinematic shot of massive shipping container cranes at a modern deepwater port during dusk with industrial lighting and metallic sheen">
+<div class="relative z-10 max-w-xl">
+<span class="text-secondary text-[0.6875rem] font-label uppercase tracking-[0.2em] mb-4 block">Institutional Infrastructure</span>
+<h1 class="text-white font-headline text-5xl font-bold tracking-tight mb-6 leading-tight">
+                    The Sovereign Gateway to South American Trade
+                </h1>
+<p class="text-primary-fixed-dim text-lg leading-relaxed mb-8 font-light">
+                    Join the global elite of logistics operators and institutional investors in the world's most strategic maritime hub.
+                </p>
+<div class="flex gap-4">
+<div class="bg-white/10 backdrop-blur-md px-6 py-4 rounded-lg">
+<div class="text-white font-bold text-2xl font-headline">40m+</div>
+<div class="text-primary-fixed-dim text-[0.6875rem] uppercase tracking-wider">TEU Capacity</div>
+</div>
+<div class="bg-white/10 backdrop-blur-md px-6 py-4 rounded-lg">
+<div class="text-white font-bold text-2xl font-headline">16.5m</div>
+<div class="text-primary-fixed-dim text-[0.6875rem] uppercase tracking-wider">Draft Depth</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Access Portal -->
+<section class="w-full lg:w-1/2 flex flex-col justify-center items-center p-8 md:p-24 bg-surface">
+<div class="w-full max-w-md">
+<div class="mb-12">
+<h2 class="text-primary font-headline text-3xl font-bold mb-2">Institutional Access</h2>
+<p class="text-on-surface-variant font-body">Enter your corporate credentials to manage your port operations or investment portfolio.</p>
+</div>
+<form class="space-y-6">
+<div class="space-y-2">
+<label class="text-[0.6875rem] font-label uppercase tracking-widest text-on-surface-variant ml-1">Corporate ID</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">corporate_fare</span>
+<input class="w-full pl-12 pr-4 py-4 bg-surface-container-lowest border-0 ring-1 ring-outline-variant/15 focus:ring-2 focus:ring-primary rounded-lg text-on-surface placeholder:text-outline/50 transition-all" placeholder="G-XXXX-XXXXX" type="text"/>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center ml-1">
+<label class="text-[0.6875rem] font-label uppercase tracking-widest text-on-surface-variant">Password</label>
+<a class="text-[0.6875rem] font-label uppercase tracking-widest text-secondary hover:underline transition-all" href="#">Reset Access</a>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">lock</span>
+<input class="w-full pl-12 pr-12 py-4 bg-surface-container-lowest border-0 ring-1 ring-outline-variant/15 focus:ring-2 focus:ring-primary rounded-lg text-on-surface placeholder:text-outline/50 transition-all" placeholder="••••••••••••" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-outline hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-xl">visibility</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-3 py-2">
+<input class="w-4 h-4 rounded text-secondary focus:ring-secondary border-outline-variant" id="remember" type="checkbox"/>
+<label class="text-sm text-on-surface-variant" for="remember">Remember this terminal for 30 days</label>
+</div>
+<button class="w-full py-4 bg-primary text-white font-headline font-bold rounded-lg hover:bg-primary-container transition-all shadow-lg shadow-primary/10 flex justify-center items-center gap-2">
+<span>Secure Login</span>
+<span class="material-symbols-outlined text-lg">login</span>
+</button>
+</form>
+<!-- Alternate Actions: The "Command" Units -->
+<div class="mt-12 pt-12 border-t border-outline-variant/15 space-y-4">
+<p class="text-[0.6875rem] font-label uppercase tracking-widest text-on-surface-variant text-center mb-6">New Partnerships</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<button class="flex flex-col items-start p-4 bg-surface-container-low border border-outline-variant/10 rounded-lg hover:bg-surface-container transition-all group">
+<span class="material-symbols-outlined text-secondary mb-2 group-hover:scale-110 transition-transform">account_balance</span>
+<span class="text-sm font-bold text-primary block">Request Investment Access</span>
+<span class="text-[0.625rem] text-on-surface-variant uppercase mt-1">Sovereign Funds &amp; PE</span>
+</button>
+<button class="flex flex-col items-start p-4 bg-surface-container-low border border-outline-variant/10 rounded-lg hover:bg-surface-container transition-all group">
+<span class="material-symbols-outlined text-secondary mb-2 group-hover:scale-110 transition-transform">sailing</span>
+<span class="text-sm font-bold text-primary block">Inquire as Private Operator</span>
+<span class="text-[0.625rem] text-on-surface-variant uppercase mt-1">Terminal &amp; Logistics</span>
+</button>
+</div>
+</div>
+<div class="mt-12 flex justify-center gap-6">
+<img alt="Compliance 1" class="opacity-40 grayscale hover:grayscale-0 transition-all" data-alt="Government institutional logo representing trade ministry with professional clean lines" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBa39dYPtO4rwNVV5WVd_XoDZMXRg0jqGSr4dJVuw8QGuM3HIHqsKCBaW_dV2TPsY9nj0Scc4WnC5hR1mMw37BGKngjEjUuj-iAD1s85hzRSlFqTXTj8z6oYIBdjivHDVBDtpxzBiJO48hbHLbzwgaiJ7uM_qr7ldpiKW0mmgNilyAadOLIl1ihP0CaDtfboAyf6H1eSeSYFkOPzN2jgOwBZUN_HrfNqZEDjT2zydXHRZ2zOR2FNLKE7AHUJ4foPruSuJYljLoEJq0"/>
+<img alt="Compliance 2" class="opacity-40 grayscale hover:grayscale-0 transition-all" data-alt="Maritime authority crest with anchor symbol and professional typography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxPGdsrhnHAtRdVo23h-y_TA1q7qwyjUBu6D_pSnA__0tXXqNQBo7lonTELxQ16v-Lvo3m3IFilbGJcNbZHEx3MPSG3sPjGm5KFooYXOLmHspoYjfzVwVYmr4j5q6oYrlLo4vrtm4bBkAr7YYkVDAd1UW2So3Uq7O8ptDayk19yWYTU0udhhEx9Cjmgn6iw8iSy3nSLhPSSyyT2faO3IWuN-LsX_ebdhqe6T0GfZ2G63G2xegSl93Xl8A8hQg641A321tQFsxHd4k"/>
+<img alt="Compliance 3" class="opacity-40 grayscale hover:grayscale-0 transition-all" data-alt="Engineering college logo for institutional trust and excellence" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoNVqyzyj75G9SdUH1IbgCmZgtjuunyadC-rCrOmUMLkVldbcrFF1jPFvF76hxV7yierXJ4g9xO6FLQOLzQspnsKyLnfBC-kiKi-KC6Bl7ZuyZ4y05oFFvzqBZlouLdGTKHyj00bj7euw7tAUOw7Jb6Gyi0fVCRaLlXiT-EkFznYG2qFDvYh1UqBFgUxHKZ_Z_sRqYgWlHdoozFR72-yLSVjrCk_ej4Oi1bgUk3c3TDsOMkyYBXSUYvcNGZgThdO1p8_XxPl9Is10"/>
+</div>
+</div>
+</section>
+</main>
+<!-- Institutional Footer -->
+<footer class="w-full py-8 px-8 flex flex-col md:flex-row justify-between items-center gap-4 bg-slate-900 text-white">
+<div class="text-[0.875rem] text-slate-400 font-body">
+            © 2024 Chancay Megaport Authority. Institutional Excellence &amp; Global Logistics.
+        </div>
+<div class="flex gap-6 text-[0.875rem]">
+<a class="text-slate-400 hover:text-secondary transition-colors font-label uppercase tracking-widest" href="#">Privacy Policy</a>
+<a class="text-slate-400 hover:text-secondary transition-colors font-label uppercase tracking-widest" href="#">Terms of Service</a>
+<a class="text-slate-400 hover:text-secondary transition-colors font-label uppercase tracking-widest" href="#">MINCETUR Compliance</a>
+</div>
+</footer>
+</body></html>

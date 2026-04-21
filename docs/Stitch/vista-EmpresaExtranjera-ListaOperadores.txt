@@ -1,0 +1,325 @@
+Descripcion: Esta vista es para empresas extranjeras que quieren ver los operadores que hay en el puerto, pero deben logearse.
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Operators Portal | Chancay Gateway</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700;800;900&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-background": "#131d24",
+              "tertiary": "#3f3828",
+              "outline-variant": "#c4c7cb",
+              "on-secondary-fixed-variant": "#930010",
+              "inverse-on-surface": "#e8f2fd",
+              "on-error": "#ffffff",
+              "on-secondary-container": "#fffbff",
+              "on-tertiary-fixed-variant": "#4d4635",
+              "surface-container-lowest": "#ffffff",
+              "primary-fixed": "#d9e4ef",
+              "surface-container": "#e5effa",
+              "secondary-fixed-dim": "#ffb3ac",
+              "secondary-container": "#db3232",
+              "surface": "#f6f9ff",
+              "surface-container-highest": "#d9e4ef",
+              "tertiary-fixed-dim": "#d1c5ae",
+              "tertiary-container": "#574f3d",
+              "surface-container-high": "#dfe9f4",
+              "outline": "#74777b",
+              "on-secondary-fixed": "#410003",
+              "on-primary-fixed-variant": "#3e4851",
+              "background": "#f6f9ff",
+              "primary-fixed-dim": "#bdc8d2",
+              "on-error-container": "#93000a",
+              "on-tertiary-fixed": "#201b0c",
+              "on-surface": "#131d24",
+              "inverse-surface": "#28323a",
+              "on-surface-variant": "#44474b",
+              "on-primary": "#ffffff",
+              "primary": "#303a43",
+              "surface-variant": "#d9e4ef",
+              "on-tertiary": "#ffffff",
+              "secondary-fixed": "#ffdad6",
+              "surface-container-low": "#ebf5ff",
+              "surface-bright": "#f6f9ff",
+              "on-secondary": "#ffffff",
+              "on-primary-container": "#b9c3ce",
+              "inverse-primary": "#bdc8d2",
+              "primary-container": "#47515a",
+              "secondary": "#b7131d",
+              "on-tertiary-container": "#ccc1aa",
+              "surface-tint": "#556069",
+              "tertiary-fixed": "#ede1c9",
+              "error": "#ba1a1a",
+              "error-container": "#ffdad6",
+              "surface-dim": "#d1dbe6",
+              "on-primary-fixed": "#131d24"
+            },
+            fontFamily: {
+              "headline": ["Public Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Public Sans', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full flex justify-between items-center px-8 py-4 max-w-full mx-auto bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-50 shadow-sm dark:shadow-none">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-slate-800 dark:text-white">Chancay Gateway</span>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors" href="#">ZEEP Opportunities</a>
+<a class="text-red-700 dark:text-red-500 font-semibold border-b-2 border-red-700 dark:border-red-500 pb-1" href="#">Operators Portal</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors" href="#">Match Feed</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors" href="#">AI Assistant</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors" href="#">Service Finder</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden lg:flex items-center bg-surface-container-low px-3 py-1.5 rounded-lg border border-outline-variant/15">
+<span class="material-symbols-outlined text-outline mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48" placeholder="Search operators..." type="text"/>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-slate-100/50 p-2 rounded-full transition-all duration-200">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-slate-100/50 p-2 rounded-full transition-all duration-200">language</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-slate-100/50 p-2 rounded-full transition-all duration-200">account_circle</span>
+<button class="ml-2 bg-primary text-on-primary px-5 py-2 text-sm font-semibold rounded hover:bg-primary-container transition-colors duration-200">Sign In</button>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-20">
+<!-- Hero Section -->
+<section class="px-8 mb-12">
+<div class="max-w-7xl mx-auto py-16 px-12 rounded-xl bg-gradient-to-br from-primary to-primary-container relative overflow-hidden flex flex-col md:flex-row justify-between items-center gap-12">
+<div class="relative z-10 max-w-2xl">
+<span class="text-on-primary-container font-label text-[0.6875rem] uppercase tracking-[0.05em] mb-4 block">Institutional Framework</span>
+<h1 class="text-on-primary text-5xl md:text-6xl font-bold tracking-[-0.02em] mb-6 leading-tight">MINCETUR Endorsed Private Operators</h1>
+<p class="text-on-primary-container text-lg leading-relaxed max-w-xl opacity-90">Access the centralized directory of certified logistics partners and port service providers approved for operations within the Chancay Megaport ecosystem.</p>
+</div>
+<div class="relative z-10 bg-white/10 backdrop-blur-xl p-6 rounded-xl border border-white/10 w-full md:w-80">
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-center border-b border-white/10 pb-4">
+<span class="text-white/60 text-xs font-label uppercase">Verified Entities</span>
+<span class="text-white text-xl font-bold">142</span>
+</div>
+<div class="flex justify-between items-center border-b border-white/10 pb-4">
+<span class="text-white/60 text-xs font-label uppercase">Pending Reviews</span>
+<span class="text-white text-xl font-bold">12</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-white/60 text-xs font-label uppercase">Trust Index</span>
+<span class="text-secondary text-xl font-bold">99.8%</span>
+</div>
+</div>
+</div>
+<!-- Decorative element -->
+<div class="absolute -right-20 -bottom-20 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
+</div>
+</section>
+<!-- Filters and Content -->
+<section class="px-8 max-w-7xl mx-auto flex flex-col lg:flex-row gap-12">
+<!-- Side Filters -->
+<aside class="w-full lg:w-64 flex-shrink-0">
+<div class="sticky top-28 space-y-8">
+<div>
+<h3 class="text-xs font-label text-on-surface-variant uppercase tracking-widest mb-4">Operator Status</h3>
+<div class="space-y-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-5 h-5 border-2 border-outline rounded flex items-center justify-center group-hover:border-secondary transition-colors">
+<div class="w-2.5 h-2.5 bg-secondary rounded-sm"></div>
+</div>
+<span class="text-sm text-on-surface font-medium">MINCETUR Verified</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-5 h-5 border-2 border-outline rounded flex items-center justify-center group-hover:border-secondary transition-colors"></div>
+<span class="text-sm text-on-surface-variant hover:text-on-surface transition-colors">Audit in Progress</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-5 h-5 border-2 border-outline rounded flex items-center justify-center group-hover:border-secondary transition-colors"></div>
+<span class="text-sm text-on-surface-variant hover:text-on-surface transition-colors">Strategic Partner</span>
+</label>
+</div>
+</div>
+<div class="pt-8 border-t border-outline-variant/15">
+<h3 class="text-xs font-label text-on-surface-variant uppercase tracking-widest mb-4">Service Category</h3>
+<div class="space-y-2">
+<button class="w-full text-left px-3 py-2 text-sm rounded bg-surface-container-high text-on-surface font-semibold">All Operators</button>
+<button class="w-full text-left px-3 py-2 text-sm rounded text-on-surface-variant hover:bg-surface-container-low transition-colors">Maritime Logistics</button>
+<button class="w-full text-left px-3 py-2 text-sm rounded text-on-surface-variant hover:bg-surface-container-low transition-colors">Customs Brokerage</button>
+<button class="w-full text-left px-3 py-2 text-sm rounded text-on-surface-variant hover:bg-surface-container-low transition-colors">Heavy Transport</button>
+<button class="w-full text-left px-3 py-2 text-sm rounded text-on-surface-variant hover:bg-surface-container-low transition-colors">Cold Chain Storage</button>
+<button class="w-full text-left px-3 py-2 text-sm rounded text-on-surface-variant hover:bg-surface-container-low transition-colors">Security Services</button>
+</div>
+</div>
+<div class="pt-8 border-t border-outline-variant/15">
+<div class="bg-surface-container-low p-4 rounded-lg">
+<span class="material-symbols-outlined text-secondary mb-2">gavel</span>
+<p class="text-xs text-on-surface leading-relaxed">All operators listed are subject to <strong>MINCETUR Compliance</strong> Regulation 2024-X.</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Operator List -->
+<div class="flex-grow space-y-6">
+<!-- Operator Card 1 -->
+<article class="bg-surface-container-lowest p-6 flex flex-col md:flex-row gap-6 hover:shadow-lg transition-shadow duration-300 relative group">
+<div class="w-full md:w-48 h-32 md:h-auto bg-surface-container-high rounded overflow-hidden flex-shrink-0">
+<img alt="Logistics center" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Modern high-tech logistics warehouse interior with organized shelving systems and bright industrial lighting for a professional cargo service provider" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBH9brUB-ODFk6U_DLjAqZdNy14DsGaWAIZxI-WEh-L8WrlnjHd2p1wFFjPTMVlsQdK3NGSdT7ryENolDaZwUXiH02vCt7hzArpI8uAyQfXzQNXzR1eFkqYhqAY7_O4GfR34S7Hkv0e9V4JmdH5zraZsYbLZq-mqBNpvwiPcZFwIOhZuYkm5sC4vLIvolqbR15FQ7RnV45TS6ONawJfsQPjDW3B8lLR_NCblpR5vd-QevqRm2AJfIW8xcHKPGcT58Gfv1AMXfgfR7c"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2">
+<h2 class="text-xl font-bold text-on-surface">Pacific Nexus Logistics</h2>
+<span class="material-symbols-outlined text-secondary text-base" style="font-variation-settings: 'FILL' 1;" title="Verified">verified</span>
+</div>
+<span class="px-2 py-0.5 bg-tertiary-fixed text-on-tertiary-fixed text-[0.625rem] font-label uppercase tracking-wider rounded">Tier 1 Partner</span>
+</div>
+<p class="text-on-surface-variant text-sm mb-4 line-clamp-2 leading-relaxed">Specializing in multi-modal heavy cargo and deep-sea port operations. Holding ISO 9001 and MINCETUR Logistics Excellence certifications for 2024.</p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-3 py-1 bg-surface-container rounded-full text-[0.6875rem] font-medium text-primary">Heavy Lift</span>
+<span class="px-3 py-1 bg-surface-container rounded-full text-[0.6875rem] font-medium text-primary">Warehouse Solutions</span>
+<span class="px-3 py-1 bg-surface-container rounded-full text-[0.6875rem] font-medium text-primary">Customs Clearance</span>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+<div class="flex gap-4">
+<div class="flex items-center text-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-sm mr-1">location_on</span>
+                                    Chancay North Zone
+                                </div>
+<div class="flex items-center text-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-sm mr-1">star</span>
+                                    4.9 Rating
+                                </div>
+</div>
+<button class="text-secondary font-semibold text-sm hover:underline flex items-center">
+                                View Full Profile
+                                <span class="material-symbols-outlined text-base ml-1">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Operator Card 2 -->
+<article class="bg-surface-container-lowest p-6 flex flex-col md:flex-row gap-6 hover:shadow-lg transition-shadow duration-300 relative group">
+<div class="w-full md:w-48 h-32 md:h-auto bg-surface-container-high rounded overflow-hidden flex-shrink-0">
+<img alt="Shipping container" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="A clean, vibrant stack of multi-colored shipping containers at a port under a bright clear sky representing efficient maritime trade" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNpH5Zp1dUpapMhbXCrd12TwBCzMjAZPux1lyovLj2QE3bAj3MmmIfh3PBAi1EnGrbTmkVRyxZrcg8C0kquDQlaj4MfrBhXQEl0NJYy0ZfAK4mLZSgfBacbJv5U876266TwX4ZGrz7yphs1lv5bjy2p9oubll2f1_0VkZKH1Q60Uuc8WcCeS3vru4A6xZsDREHyaiIWefCysRlWopEvZiARG-8MRI7ReQUj5LTJoeAtSiMBlj_Q7t5lJgg7_igSUi_G0xnoiQnfp0"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2">
+<h2 class="text-xl font-bold text-on-surface">Andean Maritime Corridors</h2>
+<span class="material-symbols-outlined text-secondary text-base" style="font-variation-settings: 'FILL' 1;" title="Verified">verified</span>
+</div>
+<span class="px-2 py-0.5 bg-surface-variant text-on-surface-variant text-[0.625rem] font-label uppercase tracking-wider rounded">Strategic Provider</span>
+</div>
+<p class="text-on-surface-variant text-sm mb-4 line-clamp-2 leading-relaxed">Integrated cold chain management for high-value perishable exports. Direct connectivity to Terminal 1 berths with real-time tracking.</p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-3 py-1 bg-surface-container rounded-full text-[0.6875rem] font-medium text-primary">Cold Chain</span>
+<span class="px-3 py-1 bg-surface-container rounded-full text-[0.6875rem] font-medium text-primary">Agro-Export</span>
+<span class="px-3 py-1 bg-surface-container rounded-full text-[0.6875rem] font-medium text-primary">IoT Tracking</span>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+<div class="flex gap-4">
+<div class="flex items-center text-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-sm mr-1">location_on</span>
+                                    Southern Terminal Hub
+                                </div>
+<div class="flex items-center text-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-sm mr-1">star</span>
+                                    4.7 Rating
+                                </div>
+</div>
+<button class="text-secondary font-semibold text-sm hover:underline flex items-center">
+                                View Full Profile
+                                <span class="material-symbols-outlined text-base ml-1">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Operator Card 3 -->
+<article class="bg-surface-container-lowest p-6 flex flex-col md:flex-row gap-6 hover:shadow-lg transition-shadow duration-300 relative group border-l-4 border-secondary/20">
+<div class="w-full md:w-48 h-32 md:h-auto bg-surface-container-high rounded overflow-hidden flex-shrink-0">
+<img alt="Customs office" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Professional office environment with digital screens displaying logistics data and maps, focused on regulatory compliance and transparency" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8THX2H2UQ3tXjq8qGycSbc2HmKZVDKLEgmobV6yH4xDK5r3HeKHEVgZsDpq228RNMl6eCdgZtqN1fkGV1a_hN0PTYOqMztGA2v2Vh38MLEsBf6hwUP6HDb-1QGSUyKn3Tj9bhPfOUPQ66vhINZ5WmT4lFlEesJ_uDZ-8Yf6nqgLEa35IdYkQqTGymHiMpBgkO2-A5UF17WgEGmfCKP9n_SSfFKElo-O2pLZvoedMkUHLlQ6ONq6a1ckr4hqRJsH6askcIcItwJhI"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2">
+<h2 class="text-xl font-bold text-on-surface">Global Customs Integrity S.A.</h2>
+<span class="material-symbols-outlined text-outline text-base">verified</span>
+</div>
+<span class="px-2 py-0.5 bg-error-container text-on-error-container text-[0.625rem] font-label uppercase tracking-wider rounded">Audit Pending</span>
+</div>
+<p class="text-on-surface-variant text-sm mb-4 line-clamp-2 leading-relaxed">High-efficiency brokerage services with a focus on compliance automation. Pending 2024 recertification status but fully operational.</p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-3 py-1 bg-surface-container rounded-full text-[0.6875rem] font-medium text-primary">Brokerage</span>
+<span class="px-3 py-1 bg-surface-container rounded-full text-[0.6875rem] font-medium text-primary">AI Compliance</span>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+<div class="flex gap-4">
+<div class="flex items-center text-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-sm mr-1">location_on</span>
+                                    Administrative District
+                                </div>
+<div class="flex items-center text-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-sm mr-1">star</span>
+                                    4.5 Rating
+                                </div>
+</div>
+<button class="text-secondary font-semibold text-sm hover:underline flex items-center">
+                                View Full Profile
+                                <span class="material-symbols-outlined text-base ml-1">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Load More / Pagination -->
+<div class="flex justify-center pt-8">
+<button class="px-8 py-3 bg-surface-container-high text-primary font-bold rounded-lg hover:bg-surface-container-highest transition-colors flex items-center gap-2">
+                        Show More Operators
+                        <span class="material-symbols-outlined">expand_more</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-900 dark:bg-black text-white w-full py-12 px-8 mt-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex flex-col items-center md:items-start gap-2">
+<span class="text-slate-400 font-bold">Chancay Gateway</span>
+<p class="text-slate-400 text-[0.875rem]">© 2024 Chancay Megaport Authority. Institutional Excellence &amp; Global Logistics.</p>
+</div>
+<div class="flex gap-8">
+<a class="text-slate-400 hover:text-red-500 transition-colors text-[0.875rem] font-label tracking-widest uppercase" href="#">Privacy Policy</a>
+<a class="text-slate-400 hover:text-red-500 transition-colors text-[0.875rem] font-label tracking-widest uppercase" href="#">Terms of Service</a>
+<a class="text-slate-400 hover:text-red-500 transition-colors text-[0.875rem] font-label tracking-widest uppercase" href="#">MINCETUR Compliance</a>
+<a class="text-slate-400 hover:text-red-500 transition-colors text-[0.875rem] font-label tracking-widest uppercase" href="#">Contact Support</a>
+</div>
+</footer>
+<!-- FAB for Support (Contextual) -->
+<div class="fixed bottom-8 right-8 z-50">
+<button class="bg-secondary text-on-secondary p-4 rounded-full shadow-[0_12px_32px_rgba(183,19,29,0.25)] flex items-center justify-center hover:scale-105 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">help_outline</span>
+</button>
+</div>
+</body></html>

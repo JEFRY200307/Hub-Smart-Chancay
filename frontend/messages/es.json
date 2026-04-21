@@ -1,0 +1,70 @@
+{
+  "Common": {
+    "title": "P.L.A.I.A.",
+    "subtitle": "Plataforma de Legalidad, Arrendamiento e Instalación Automatizada",
+    "login": "Acceso CIP",
+    "signIn": "Iniciar Sesión",
+    "logout": "Cerrar Sesión"
+  },
+  "Navigation": {
+    "home": "Inicio",
+    "about": "Nosotros",
+    "legal": "Marco Legal",
+    "language": "Idioma",
+    "dashboard": "Dashboard",
+    "benefits": "Beneficios ZEEP",
+    "port": "Operaciones Portuarias",
+    "match": "Smart Match",
+    "legalAi": "Legal AI",
+    "services": "Servicios"
+  },
+  "Hero": {
+    "badge": "Respaldo Técnico CIP Lima",
+    "title": "Simplifica tu entrada a la ZEEP Chancay con IA",
+    "subtitle": "Navega la complejidad técnica y legal del mayor hub portuario de Sudamérica con inteligencia artificial diseñada por ingenieros para ingenieros.",
+    "ctaStart": "[Iniciar Diagnóstico Inteligente (3 min)]",
+    "ctaLegal": "Ver Marco Legal"
+  },
+  "Stats": {
+    "leadership": "Liderazgo en la Cuenca del Pacífico",
+    "leadershipDesc": "El Colegio de Ingenieros del Perú - CD Lima garantiza la integridad de los datos y el cumplimiento de estándares internacionales para todas las empresas que operan en la Zona Económica Especial Privada de Chancay.",
+    "investment": "Inversión Total",
+    "jobs": "Empleos Generados",
+    "compliance": "Cumplimiento Legal",
+    "installedCapacity": "Capacidad Instalada IA"
+  },
+  "Footer": {
+    "brand": "P.L.A.I.A.",
+    "copyright": "© 2024 Colegio de Ingenieros del Perú - Lima. P.L.A.I.A.: The Institutional Vanguard.",
+    "resources": "Recursos",
+    "contact": "Contacto Directo",
+    "qualitySeal": "Sello de Calidad"
+  },
+  "Login": {
+    "institutionalInfrastructure": "Infraestructura Institucional",
+    "visualTitle": "Puerta de Enlace Soberana al Comercio Sudamericano",
+    "visualSubtitle": "Únete a la élite global de operadores logísticos e inversores institucionales en el centro marítimo más estratégico del mundo.",
+    "teuCapacity": "Capacidad TEU",
+    "draftDepth": "Profundidad de Calado",
+    "accessTitle": "Acceso Institucional",
+    "accessSubtitle": "Ingrese sus credenciales corporativas para gestionar sus operaciones portuarias o cartera de inversiones.",
+    "corporateRuc": "RUC Corporativo",
+    "password": "Contraseña",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "secureAccess": "Acceso Seguro",
+    "notAccredited": "¿Aún no estás acreditado en la ZEEP Chancay?",
+    "registerCompany": "Registrar Empresa Nueva"
+  },
+  "Onboarding": {
+    "institutionalProfiling": "Perfilamiento Institucional",
+    "step1": "Paso 1: Sector Industrial",
+    "progress": "Progreso del Onboarding",
+    "aiAnalyst": "Analista IA Activo",
+    "welcome": "Bienvenida Institucional",
+    "aiGreeting": "\"Bienvenido al portal de la Zona Económica Especial de Chancay. Para proporcionar proyecciones fiscales y logísticas precisas, necesito entender el perfil de su operación.\"",
+    "qSector": "¿Qué sector define su operación principal?",
+    "qMetrics": "Métricas y Proyecciones del Proyecto",
+    "qCapital": "Origen del Capital",
+    "continue": "Continuar a Evaluación Logística"
+  }
+}

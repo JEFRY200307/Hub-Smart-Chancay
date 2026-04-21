@@ -1,0 +1,70 @@
+{
+  "Common": {
+    "title": "P.L.A.I.A.",
+    "subtitle": "法律、租赁与自动化安装平台",
+    "login": "CIP 访问",
+    "signIn": "登录",
+    "logout": "登出"
+  },
+  "Navigation": {
+    "home": "首页",
+    "about": "关于我们",
+    "legal": "法律框架",
+    "language": "语言",
+    "dashboard": "仪表板",
+    "benefits": "ZEEP 优惠",
+    "port": "港口运营",
+    "match": "智能匹配",
+    "legalAi": "法律人工智能",
+    "services": "服务"
+  },
+  "Hero": {
+    "badge": "秘鲁工程师学院 (CIP) 利马技术支持",
+    "title": "人工智能助手简化您的钱凯经济特区准入",
+    "subtitle": "利用工程师为工程师设计的人工智能，驾驭南美最大港口枢纽的法律和技术复杂性。",
+    "ctaStart": "[开始智能诊断 (3 分钟)]",
+    "ctaLegal": "查看法律框架"
+  },
+  "Stats": {
+    "leadership": "环太平洋地区的领导地位",
+    "leadershipDesc": "秘鲁工程师学院 - 利马分院 (CD Lima) 为在钱凯私人经济特区运营的所有公司提供数据完整性保证并符合国际标准。",
+    "investment": "总投资",
+    "jobs": "创造就业机会",
+    "compliance": "法律合规",
+    "installedCapacity": "人工智能装机容量"
+  },
+  "Footer": {
+    "brand": "P.L.A.I.A.",
+    "copyright": "© 2024 秘鲁工程师学院 - 利马。P.L.A.I.A.：机构先锋。",
+    "resources": "资源",
+    "contact": "直接联系",
+    "qualitySeal": "质量印章"
+  },
+  "Login": {
+    "institutionalInfrastructure": "机构基础设施",
+    "visualTitle": "通往南美贸易的主权大门",
+    "visualSubtitle": "加入全球物流运营商和机构投资者的精英行列，共同打造世界上最具战略意义的航运枢纽。",
+    "teuCapacity": "标准箱容量",
+    "draftDepth": "吃水深度",
+    "accessTitle": "机构访问",
+    "accessSubtitle": "输入您的公司凭据以管理您的港口运营或投资组合。",
+    "corporateRuc": "公司统一社会信用代码/RUC",
+    "password": "密码",
+    "forgotPassword": "忘记密码？",
+    "secureAccess": "安全访问",
+    "notAccredited": "尚未在钱凯经济特区获得认证？",
+    "registerCompany": "注册新公司"
+  },
+  "Onboarding": {
+    "institutionalProfiling": "机构概况",
+    "step1": "第 1 步：工业部门",
+    "progress": "入驻进度",
+    "aiAnalyst": "人工智能分析师已激活",
+    "welcome": "机构欢迎",
+    "aiGreeting": "\"欢迎来到钱凯经济特区门户网站。为了提供准确的财政和物流预测，我需要了解您公司的运营概况。\"",
+    "qSector": "哪个部门定义了您的主要业务？",
+    "qMetrics": "项目指标与预测",
+    "qCapital": "资本来源",
+    "continue": "继续进行物流评估"
+  }
+}

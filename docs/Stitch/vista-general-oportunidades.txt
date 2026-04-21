@@ -1,0 +1,360 @@
+Descripcion: ESta vista de ve ser la primera vista para todo usuario que navegue por la pagina sin necesidad de un login
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ZEEP Opportunities Dashboard | Chancay Gateway</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700;800;900&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "on-background": "#131d24",
+                "tertiary": "#3f3828",
+                "outline-variant": "#c4c7cb",
+                "on-secondary-fixed-variant": "#930010",
+                "inverse-on-surface": "#e8f2fd",
+                "on-error": "#ffffff",
+                "on-secondary-container": "#fffbff",
+                "on-tertiary-fixed-variant": "#4d4635",
+                "surface-container-lowest": "#ffffff",
+                "primary-fixed": "#d9e4ef",
+                "surface-container": "#e5effa",
+                "secondary-fixed-dim": "#ffb3ac",
+                "secondary-container": "#db3232",
+                "surface": "#f6f9ff",
+                "surface-container-highest": "#d9e4ef",
+                "tertiary-fixed-dim": "#d1c5ae",
+                "tertiary-container": "#574f3d",
+                "surface-container-high": "#dfe9f4",
+                "outline": "#74777b",
+                "on-secondary-fixed": "#410003",
+                "on-primary-fixed-variant": "#3e4851",
+                "background": "#f6f9ff",
+                "primary-fixed-dim": "#bdc8d2",
+                "on-error-container": "#93000a",
+                "on-tertiary-fixed": "#201b0c",
+                "on-surface": "#131d24",
+                "inverse-surface": "#28323a",
+                "on-surface-variant": "#44474b",
+                "on-primary": "#ffffff",
+                "primary": "#303a43",
+                "surface-variant": "#d9e4ef",
+                "on-tertiary": "#ffffff",
+                "secondary-fixed": "#ffdad6",
+                "surface-container-low": "#ebf5ff",
+                "surface-bright": "#f6f9ff",
+                "on-secondary": "#ffffff",
+                "on-primary-container": "#b9c3ce",
+                "inverse-primary": "#bdc8d2",
+                "primary-container": "#47515a",
+                "secondary": "#b7131d",
+                "on-tertiary-container": "#ccc1aa",
+                "surface-tint": "#556069",
+                "tertiary-fixed": "#ede1c9",
+                "error": "#ba1a1a",
+                "error-container": "#ffdad6",
+                "surface-dim": "#d1dbe6",
+                "on-primary-fixed": "#131d24"
+              },
+              fontFamily: {
+                "headline": ["Public Sans"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Public Sans', sans-serif; }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+        }
+        .tonal-gradient {
+            background: linear-gradient(135deg, #303a43 0%, #47515a 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-secondary/30">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full flex justify-between items-center px-8 py-4 max-w-full mx-auto bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-50 shadow-sm dark:shadow-none">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-slate-800 dark:text-white">Chancay Gateway</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-red-700 dark:text-red-500 font-semibold border-b-2 border-red-700 dark:border-red-500 pb-1" href="#">ZEEP Opportunities</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors" href="#">Operators Portal</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors" href="#">Match Feed</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors" href="#">AI Assistant</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors" href="#">Service Finder</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-3 mr-4">
+<span class="material-symbols-outlined text-slate-600 cursor-pointer hover:bg-slate-100/50 p-2 rounded-full transition-all">notifications</span>
+<span class="material-symbols-outlined text-slate-600 cursor-pointer hover:bg-slate-100/50 p-2 rounded-full transition-all">language</span>
+<span class="material-symbols-outlined text-slate-600 cursor-pointer hover:bg-slate-100/50 p-2 rounded-full transition-all">account_circle</span>
+</div>
+<button class="bg-primary text-white px-5 py-2 rounded-md font-medium hover:opacity-90 active:scale-95 transition-transform">Sign In</button>
+</div>
+</nav>
+<!-- Side Navigation Bar -->
+<aside class="hidden lg:flex flex-col fixed left-0 top-0 h-full py-6 w-64 bg-slate-100 dark:bg-slate-950 border-r border-slate-200/15 z-40 mt-[72px]">
+<div class="px-6 mb-8">
+<h2 class="text-lg font-black text-slate-900 dark:text-white uppercase tracking-tight">Sovereign Gateway</h2>
+<p class="text-[0.6875rem] font-label text-slate-500 uppercase tracking-widest">Global Logistics Hub</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-6 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-200/30 hover:translate-x-1 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 bg-slate-200/50 dark:bg-slate-800/50 text-red-700 dark:text-red-500 font-bold rounded-r-lg translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+<span class="text-sm">ZEEP Benefits</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-200/30 hover:translate-x-1 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="anchor">anchor</span>
+<span class="text-sm">Port Operations</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-200/30 hover:translate-x-1 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="Handshake">handshake</span>
+<span class="text-sm">Smart Match</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-200/30 hover:translate-x-1 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="gavel">gavel</span>
+<span class="text-sm">Legal AI</span>
+</a>
+</nav>
+<div class="mt-auto px-6 space-y-1 border-t border-slate-200/10 pt-4">
+<a class="flex items-center gap-3 py-2 text-slate-500 hover:text-slate-900 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="settings">settings</span>
+<span class="text-xs uppercase tracking-widest font-label">Settings</span>
+</a>
+<a class="flex items-center gap-3 py-2 text-slate-500 hover:text-slate-900 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="help_outline">help_outline</span>
+<span class="text-xs uppercase tracking-widest font-label">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="lg:ml-64 pt-24 pb-12 px-8">
+<!-- Hero Section -->
+<header class="relative mb-12 rounded-xl overflow-hidden tonal-gradient p-12 flex flex-col md:flex-row items-center justify-between text-white gap-8">
+<div class="max-w-2xl z-10">
+<span class="inline-block px-3 py-1 bg-secondary text-[0.6875rem] font-label uppercase tracking-[0.2em] mb-4">Strategic Special Economic Zone</span>
+<h1 class="text-5xl font-extrabold tracking-tighter mb-4 leading-none">ZEEP Opportunities &amp; <br/>Institutional Incentives</h1>
+<p class="text-lg text-on-primary-container leading-relaxed font-body opacity-90">Maximize your global footprint through the Special Economic Zone of Chancay. Access exclusive tax exonerations and Tier-1 logistics infrastructure supported by the Peruvian State.</p>
+<div class="mt-8 flex gap-4">
+<button class="bg-white text-primary px-6 py-3 font-semibold rounded-md hover:bg-surface-container-low transition-colors active:scale-95">Download PDF Prospectus</button>
+<button class="border border-white/30 text-white px-6 py-3 font-semibold rounded-md hover:bg-white/10 transition-colors active:scale-95">Consult AI Assistant</button>
+</div>
+</div>
+<div class="relative w-full md:w-1/3 h-64 md:h-80 rounded-lg overflow-hidden shadow-2xl">
+<img alt="Chancay Port View" class="w-full h-full object-cover" data-alt="dramatic wide angle shot of a massive modern cargo port with towering blue cranes and stacks of multi-colored containers at dusk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQPcgZCiMgOEfEhSeAbMJZ4LNS0EJ7-oEzJFR9Q9qC7hp5OAxoKY_mQobwvUhyPKjtgUfG3t5jvXZWrQY2VYdXUCObfY4pMwi4hr4aJrWHgZBHxpiJbZx4NVOB0NgzxVuTedC_3E6MdWLYK_BMN-rEkQi7_LhqWQhQPBRvJl9z0b7h_9s4f5DknpWX6wY3Z29SrNv3TxGTC0fj5m2lH4ngbHj2Wno94h07vh07eJvqr-6NvnaZxiyKrN_LT82I0du5Ld8-SSGVS18"/>
+</div>
+</header>
+<!-- Bento Grid: Key Stats & Quick Benefits -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+<!-- Stat 1 -->
+<div class="md:col-span-1 bg-surface-container-low p-8 rounded-xl flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-secondary text-4xl mb-4" data-icon="percent">percent</span>
+<h3 class="text-[0.6875rem] font-label text-slate-500 uppercase tracking-widest mb-1">Income Tax</h3>
+<p class="text-4xl font-black text-primary">0%</p>
+</div>
+<p class="text-xs text-slate-500 mt-4 leading-relaxed">Full exoneration for authorized operators within the ZEEP perimeter for the first 15 fiscal periods.</p>
+</div>
+<!-- Bento Visual Card -->
+<div class="md:col-span-2 relative group rounded-xl overflow-hidden h-64 md:h-auto">
+<img alt="Logistics Network" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="aerial view of complex highway interchange connecting a port to the hinterland with golden sunlight and cinematic depth of field" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1r_5ddc0reqS-PCHu0nyeuCT8dwrkYwRfXge8V2v7f0Pw9SnxTjoCGHEo8Gz6EsRlQOu4BDAfgB2-ujL_tBb6PacLjsUXGWCbQszSWZe0ZrRrAthJaTxf6pStS3e7H7drVXPVHqpj6BkxUYzF0NCeq4LI822vX2ImuCo3-oq815dvyXHkn5jpx6DGIGI7LUgeTgp-lQ1syUf-KFYxOQuu3_n5aBJNwS9WTW2qQ23ylZXHWyhjU_dIACVe61xQ2i07rUpDYlP1BS0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent p-8 flex flex-col justify-end">
+<h3 class="text-2xl font-bold text-white mb-2">Prime Strategic Location</h3>
+<p class="text-white/80 text-sm max-w-md">Direct access to the Pan-American Highway and the future coastal rail link, reducing inland transit times by 40%.</p>
+</div>
+</div>
+<!-- Stat 2 -->
+<div class="md:col-span-1 bg-tertiary-container p-8 rounded-xl text-white flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-tertiary-fixed text-4xl mb-4" data-icon="verified_user">verified_user</span>
+<h3 class="text-[0.6875rem] font-label text-white/60 uppercase tracking-widest mb-1">State Guarantee</h3>
+<p class="text-3xl font-bold">MINCETUR</p>
+</div>
+<p class="text-xs text-white/70 mt-4 leading-relaxed">Direct institutional backing for legal stability and rapid dispute resolution frameworks.</p>
+</div>
+</section>
+<!-- Detailed Opportunities: Horizontal Cards -->
+<section class="space-y-6 mb-12">
+<div class="flex items-end justify-between border-b border-outline-variant/15 pb-4">
+<div>
+<h2 class="text-3xl font-bold tracking-tight text-primary">Core Incentive Framework</h2>
+<p class="text-slate-500 font-body">Detailed breakdown of current fiscal and operational advantages.</p>
+</div>
+<button class="text-secondary font-bold text-sm uppercase tracking-widest flex items-center gap-2 hover:translate-x-1 transition-transform">
+                    View Full Legal Base <span class="material-symbols-outlined text-base" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow border-t-4 border-secondary">
+<div class="flex items-center justify-between mb-6">
+<div class="bg-secondary-fixed p-3 rounded-lg">
+<span class="material-symbols-outlined text-secondary" data-icon="account_balance">account_balance</span>
+</div>
+<span class="bg-surface-variant px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter">Fiscal</span>
+</div>
+<h4 class="text-xl font-bold mb-3 text-primary">VAT (IGV) Suspension</h4>
+<p class="text-sm text-slate-600 leading-relaxed mb-6">Import of capital goods and raw materials are suspended from Value Added Tax during the production phase.</p>
+<ul class="space-y-3">
+<li class="flex items-center gap-2 text-xs text-slate-700 font-medium">
+<span class="material-symbols-outlined text-green-600 text-sm" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            Indefinite Import Suspension
+                        </li>
+<li class="flex items-center gap-2 text-xs text-slate-700 font-medium">
+<span class="material-symbols-outlined text-green-600 text-sm" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            Export-oriented Exemption
+                        </li>
+</ul>
+</div>
+<!-- Card 2 -->
+<div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow border-t-4 border-primary">
+<div class="flex items-center justify-between mb-6">
+<div class="bg-primary-fixed p-3 rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="precision_manufacturing">precision_manufacturing</span>
+</div>
+<span class="bg-surface-variant px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter">Operational</span>
+</div>
+<h4 class="text-xl font-bold mb-3 text-primary">Customs Simplification</h4>
+<p class="text-sm text-slate-600 leading-relaxed mb-6">Exclusive "Green Lane" priority for ZEEP residents with 24/7 automated clearance and AI auditing.</p>
+<ul class="space-y-3">
+<li class="flex items-center gap-2 text-xs text-slate-700 font-medium">
+<span class="material-symbols-outlined text-green-600 text-sm" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            Single Window (VUCE) Integration
+                        </li>
+<li class="flex items-center gap-2 text-xs text-slate-700 font-medium">
+<span class="material-symbols-outlined text-green-600 text-sm" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            On-site SUNAT Presence
+                        </li>
+</ul>
+</div>
+<!-- Card 3 -->
+<div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow border-t-4 border-tertiary">
+<div class="flex items-center justify-between mb-6">
+<div class="bg-tertiary-fixed p-3 rounded-lg">
+<span class="material-symbols-outlined text-tertiary" data-icon="hub">hub</span>
+</div>
+<span class="bg-surface-variant px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter">Infrastructure</span>
+</div>
+<h4 class="text-xl font-bold mb-3 text-primary">Smart Grid Services</h4>
+<p class="text-sm text-slate-600 leading-relaxed mb-6">Tier-IV data connectivity and high-capacity electrical industrial redundant feeds for heavy manufacturing.</p>
+<ul class="space-y-3">
+<li class="flex items-center gap-2 text-xs text-slate-700 font-medium">
+<span class="material-symbols-outlined text-green-600 text-sm" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            5G Private Network Coverage
+                        </li>
+<li class="flex items-center gap-2 text-xs text-slate-700 font-medium">
+<span class="material-symbols-outlined text-green-600 text-sm" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            Wastewater Treatment Systems
+                        </li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Geographical Advantage Map/Module -->
+<section class="bg-surface-container-high rounded-2xl overflow-hidden flex flex-col md:flex-row mb-12">
+<div class="md:w-1/2 p-12">
+<span class="text-[0.6875rem] font-label text-secondary uppercase tracking-[0.25em] block mb-4">Strategic Logistics Hub</span>
+<h2 class="text-3xl font-bold text-primary mb-6">The Chancay-Shanghai Bridge</h2>
+<div class="space-y-6">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary" data-icon="distance">distance</span>
+<div>
+<p class="font-bold text-primary">Reduced Maritime Distance</p>
+<p class="text-sm text-slate-600">Saves 10-15 days compared to existing routes from South America to the Asian markets.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary" data-icon="ferry">boat_bus</span>
+<div>
+<p class="font-bold text-primary">Post-Panamax Capability</p>
+<p class="text-sm text-slate-600">Draft of 17.8 meters allows the world's largest vessels to dock at maximum capacity.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary" data-icon="public">public</span>
+<div>
+<p class="font-bold text-primary">Multimodal Integration</p>
+<p class="text-sm text-slate-600">Seamless transition between sea, land, and the future digital "Silk Road".</p>
+</div>
+</div>
+</div>
+</div>
+<div class="md:w-1/2 relative bg-primary-container min-h-[400px]">
+<img alt="Global Connectivity Map" class="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-overlay" data-alt="abstract stylized world map showing bright light trails connecting South America to Asia over the Pacific Ocean" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6xW83CSm5uitu9n21jQV02f2bc9LMIWEzsZsPABlg2CwLSyDbPr4Ex24ZXzPTid8czije_CI5LFt843mtkVNoyBNCXsrawk-BZVN2dnxAvDbBfjGbAjGMSZKvJelMj_cjgpSZB1IDwJqIxra0U9UlSyibkRDiDWImdsba1UQOafYwlEtmIoe_yRR-xzXWgv8SWhrT5GB0s9FWcdGpsJ6VsBpNgPgR0D98XUNAYikx8mMf3oi7zoblyvMCsE39QSx4e-aD0eL0SvE"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="bg-white/10 backdrop-blur-md p-6 rounded-lg border border-white/20 text-white text-center">
+<p class="text-4xl font-black">35%</p>
+<p class="text-[0.6875rem] font-label uppercase tracking-widest opacity-80">Reduction in Freight Costs</p>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="text-center py-16 px-8 bg-white rounded-xl border border-outline-variant/10">
+<h2 class="text-3xl font-bold text-primary mb-4">Ready to Establish Your Operations?</h2>
+<p class="text-slate-600 max-w-xl mx-auto mb-10 leading-relaxed font-body">Our specialized ZEEP task force is available to assist with institutional onboarding, legal compliance, and infrastructure requirements.</p>
+<div class="flex flex-wrap justify-center gap-6">
+<div class="flex items-center gap-4 bg-surface p-6 rounded-lg text-left min-w-[300px]">
+<span class="material-symbols-outlined text-4xl text-secondary" data-icon="support_agent">support_agent</span>
+<div>
+<p class="font-bold text-primary">Institutional Support</p>
+<p class="text-sm text-slate-500">24/7 Investor Concierge</p>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-surface p-6 rounded-lg text-left min-w-[300px]">
+<span class="material-symbols-outlined text-4xl text-secondary" data-icon="mail">mail</span>
+<div>
+<p class="font-bold text-primary">Inquiry Channel</p>
+<p class="text-sm text-slate-500">zeep@chancaygateway.gob.pe</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-900 dark:bg-black w-full py-12 px-8 mt-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex flex-col gap-2">
+<span class="text-slate-400 font-bold tracking-tighter text-lg uppercase">Chancay Gateway</span>
+<p class="text-slate-500 text-xs font-body max-w-md">© 2024 Chancay Megaport Authority. Institutional Excellence &amp; Global Logistics. Licensed by the Ministry of Foreign Trade and Tourism.</p>
+</div>
+<div class="flex flex-wrap gap-8">
+<div class="flex flex-col gap-3">
+<span class="text-white text-[0.6875rem] font-label uppercase tracking-widest border-b border-white/10 pb-2">Legal</span>
+<a class="text-slate-400 text-sm hover:text-red-500 transition-colors" href="#">Privacy Policy</a>
+<a class="text-slate-400 text-sm hover:text-red-500 transition-colors" href="#">Terms of Service</a>
+</div>
+<div class="flex flex-col gap-3">
+<span class="text-white text-[0.6875rem] font-label uppercase tracking-widest border-b border-white/10 pb-2">Compliance</span>
+<a class="text-slate-400 text-sm hover:text-red-500 transition-colors" href="#">MINCETUR Compliance</a>
+<a class="text-slate-400 text-sm hover:text-red-500 transition-colors" href="#">Port Safety Standards</a>
+</div>
+<div class="flex flex-col gap-3">
+<span class="text-white text-[0.6875rem] font-label uppercase tracking-widest border-b border-white/10 pb-2">Connect</span>
+<a class="text-slate-400 text-sm hover:text-red-500 transition-colors" href="#">Contact Support</a>
+<a class="text-slate-400 text-sm hover:text-red-500 transition-colors" href="#">Twitter (X)</a>
+</div>
+</div>
+</footer>
+</body></html>
