@@ -5,6 +5,7 @@ from datetime import datetime
 from sqlmodel import Session, select
 
 from ..domain.entities import User, RefreshToken, EmailVerificationToken
+from ..domain.user_profile import UserProfile
 
 
 class IdentityRepository:
@@ -73,6 +74,15 @@ class IdentityRepository:
         self.session.commit()
         self.session.refresh(token)
         return token
+
+    def get_user_profile(self, user_id: uuid.UUID) -> Optional[UserProfile]:
+        return self.session.get(UserProfile, user_id)
+
+    def upsert_user_profile(self, profile: UserProfile) -> UserProfile:
+        self.session.add(profile)
+        self.session.commit()
+        self.session.refresh(profile)
+        return profile
 
     def revoke_all_user_tokens(self, user_id: uuid.UUID) -> None:
         tokens = self.session.exec(

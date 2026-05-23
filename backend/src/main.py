@@ -11,6 +11,7 @@ from src.shared.infrastructure.chroma_client import check_chroma_connection
 
 # Registrar todos los modelos en SQLModel.metadata (necesario para Alembic autogenerate)
 import src.modules.identity.domain.entities           # noqa: F401
+import src.modules.identity.domain.user_profile       # noqa: F401
 import src.modules.zeep_ingestion.domain.entities     # noqa: F401
 import src.modules.onboarding.domain.entities         # noqa: F401
 import src.modules.marketplace.domain.entities        # noqa: F401

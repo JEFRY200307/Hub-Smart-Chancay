@@ -13,8 +13,11 @@ from ..application.dtos import (
     RegisterCompanyDTO, RegisterCompanyResponseDTO,
     VerifyEmailDTO, VerifyEmailResponseDTO,
     ResendOtpDTO, ResendOtpResponseDTO,
+    UpdateUserProfileDTO,
 )
 from ..application.otp_service import OtpService
+from ..application.register_service import RegisterService
+from ..application.profile_helpers import profile_to_dto, refresh_profile_completed
 from ..infrastructure.repository import IdentityRepository
 from ..domain.entities import User, RefreshToken
 from .auth_dependency import get_current_user
@@ -93,25 +96,7 @@ async def register(
     session: Session = Depends(get_session),
 ):
     repo = IdentityRepository(session)
-
-    if repo.get_user_by_email(payload.email):
-        raise DomainException(
-            title="User Already Exists",
-            detail="El correo ya está registrado.",
-            status_code=status.HTTP_409_CONFLICT,
-        )
-
-    new_user = User(
-        email=payload.email,
-        hashed_password=SecurityUtils.get_password_hash(payload.password),
-        full_name=payload.full_name,
-        role=payload.role,
-        phone=payload.phone,
-        preferred_lang=payload.preferred_lang,
-        is_verified=True,
-        is_active=True,
-    )
-    repo.create_user(new_user)
+    new_user = RegisterService(session).register(payload)
     return _issue_tokens(new_user, repo, request)
 
 
@@ -221,7 +206,10 @@ async def resend_otp(
 @router.get("/me", response_model=UserMeDTO)
 async def get_current_user_info(
     current_user: User = Depends(get_current_user),
+    session: Session = Depends(get_session),
 ):
+    repo = IdentityRepository(session)
+    profile = repo.get_user_profile(current_user.id)
     return UserMeDTO(
         id=current_user.id,
         email=current_user.email,
@@ -232,4 +220,35 @@ async def get_current_user_info(
         preferred_lang=current_user.preferred_lang,
         last_login_at=current_user.last_login_at.isoformat() if current_user.last_login_at else None,
         created_at=current_user.created_at.isoformat(),
+        profile=profile_to_dto(profile),
     )
+
+
+@router.patch("/me/profile", response_model=UserMeDTO)
+async def update_my_profile(
+    payload: UpdateUserProfileDTO,
+    current_user: User = Depends(get_current_user),
+    session: Session = Depends(get_session),
+):
+    repo = IdentityRepository(session)
+    profile = repo.get_user_profile(current_user.id)
+    if not profile:
+        raise DomainException(
+            title="Perfil no encontrado",
+            detail="Complete el registro primero.",
+            status_code=404,
+        )
+    if profile.profile_type != "empresa_inversora":
+        raise DomainException(
+            title="Forbidden",
+            detail="Solo empresas inversoras actualizan este perfil.",
+            status_code=403,
+        )
+    for field, value in payload.model_dump(exclude_unset=True).items():
+        if field == "pais_origen" and value:
+            setattr(profile, field, value.upper())
+        else:
+            setattr(profile, field, value)
+    refresh_profile_completed(profile)
+    repo.upsert_user_profile(profile)
+    return await get_current_user_info(current_user, session)

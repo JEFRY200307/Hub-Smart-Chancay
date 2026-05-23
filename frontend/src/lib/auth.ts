@@ -78,10 +78,22 @@ export async function login(email: string, password: string) {
   return data;
 }
 
+export type RegisterExtras = {
+  profile_type: string;
+  numero_cip?: string;
+  numero_cal?: string;
+  razon_social?: string;
+  ruc?: string;
+  pais_origen?: string;
+  tax_id_internacional?: string;
+  rep_legal_nombre_pasaporte?: string;
+};
+
 export async function register(
   email: string,
   password: string,
-  full_name: string
+  full_name: string,
+  extras?: RegisterExtras
 ) {
   const data = await apiFetch<LoginResponse>("/auth/register", {
     method: "POST",
@@ -89,8 +101,15 @@ export async function register(
       email,
       password,
       full_name,
-      role: "inversor",
       preferred_lang: "es",
+      profile_type: extras?.profile_type ?? "empresa_inversora",
+      numero_cip: extras?.numero_cip,
+      numero_cal: extras?.numero_cal,
+      razon_social: extras?.razon_social,
+      ruc: extras?.ruc,
+      pais_origen: extras?.pais_origen,
+      tax_id_internacional: extras?.tax_id_internacional,
+      rep_legal_nombre_pasaporte: extras?.rep_legal_nombre_pasaporte,
     }),
   });
   saveAuth(data);

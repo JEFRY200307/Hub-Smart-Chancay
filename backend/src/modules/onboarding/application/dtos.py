@@ -7,27 +7,17 @@ import uuid
 
 class OnboardingCreateDTO(BaseModel):
     session_id: uuid.UUID
-    empresa_razon_social: str = Field(..., max_length=500)
-    empresa_pais_origen: str = Field(..., min_length=2, max_length=2, description="Código ISO 3166-1 alpha-2")
-    empresa_registro_extranjero: Optional[str] = None
-    empresa_sector_ciiu: Optional[str] = None
-    empresa_capital_usd: Optional[Decimal] = None
-
-    rep_nombre: Optional[str] = None
-    rep_documento_tipo: Optional[str] = None
-    rep_documento_num: Optional[str] = None
-    rep_cargo: Optional[str] = None
-
+    sector: str = Field(..., description="manufactura | ckd | tech")
     proyecto_nombre: str = Field(..., max_length=500)
     proyecto_descripcion: Optional[str] = None
-    proyecto_monto_usd: Decimal
+    proyecto_monto_usd: Optional[Decimal] = None
+    proyecto_area_terreno_m2: Optional[Decimal] = None
+    proyecto_teus_estimados: Optional[int] = None
     proyecto_empleo_directo: int = 0
     proyecto_empleo_indirecto: int = 0
     proyecto_porcentaje_cl: Decimal = Decimal("0")
-    proyecto_duracion_meses: Optional[int] = None
     proyecto_exportacion_pct: Optional[Decimal] = None
-
-    sector: str = Field(..., description="manufactura | ckd | tech")
+    documento_perfil_url: Optional[str] = None
 
 
 class OnboardingUpdateDTO(BaseModel):

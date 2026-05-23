@@ -6,7 +6,7 @@ from decimal import Decimal
 from typing import Optional
 
 from sqlmodel import SQLModel, Field
-from sqlalchemy import Column, Text, Numeric, Boolean
+from sqlalchemy import Column, Text, Numeric, Boolean, Integer
 
 
 class InvestmentProject(SQLModel, table=True):
@@ -38,6 +38,13 @@ class InvestmentProject(SQLModel, table=True):
     )
     pais_origen_capital: str = Field(default="PE", max_length=2)
     empresa_razon_social: str = Field(max_length=500)
+    area_terreno_m2: Optional[Decimal] = Field(
+        default=None, sa_column=Column(Numeric(14, 2), nullable=True)
+    )
+    teus_estimados: Optional[int] = Field(default=None, sa_column=Column(Integer, nullable=True))
+    documento_perfil_url: Optional[str] = Field(
+        default=None, sa_column=Column(Text, nullable=True)
+    )
     is_active: bool = Field(
         default=False, sa_column=Column(Boolean, nullable=False, server_default="false")
     )

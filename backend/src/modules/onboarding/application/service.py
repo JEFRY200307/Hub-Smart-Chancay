@@ -11,6 +11,8 @@ from src.modules.ledger.application.ledger_service import LedgerService
 from src.modules.ledger.application.dtos import LedgerEventCreateDTO
 from src.modules.zeep_simulation.application.simulation_service import SimulationService
 from src.modules.zeep_simulation.application.dtos import SimulationRequestDTO
+from src.modules.identity.domain.user_profile import UserProfile
+from src.shared.domain.exceptions import DomainException
 
 
 class OnboardingService:
@@ -27,7 +29,7 @@ class OnboardingService:
         ]
 
     def _ensure_simulation_session(
-        self, dto: OnboardingCreateDTO, user_id: uuid.UUID
+        self, dto: OnboardingCreateDTO, user_id: uuid.UUID, pais_origen: str
     ) -> None:
         """Crea registro de simulación si el inversor llegó sin pasar por /simulation."""
         sim_svc = SimulationService(self.session)
@@ -56,47 +58,77 @@ class OnboardingService:
                 "ratio_empleos_tech": 0.6,
             }
 
+        monto = dto.proyecto_monto_usd if dto.proyecto_monto_usd and dto.proyecto_monto_usd > 0 else Decimal("1000000")
+        pais = pais_origen or "PE"
+
         sim_svc.calculate(
             SimulationRequestDTO(
                 session_id=dto.session_id,
                 sector=sector,
-                monto_inversion_usd=dto.proyecto_monto_usd,
+                monto_inversion_usd=monto,
                 empleo_directo=dto.proyecto_empleo_directo,
                 empleo_indirecto=dto.proyecto_empleo_indirecto,
                 porcentaje_cl=dto.proyecto_porcentaje_cl,
                 tiempo_instalacion_meses=18,
-                pais_origen=dto.empresa_pais_origen,
+                pais_origen=pais,
                 exportacion_pct=dto.proyecto_exportacion_pct or Decimal("0"),
                 variables_sector=variables,
             ),
             user_id=user_id,
         )
 
+    def _load_inversor_profile(self, user_id: uuid.UUID) -> UserProfile:
+        up = self.session.get(UserProfile, user_id)
+        if not up or up.profile_type != "empresa_inversora":
+            raise DomainException(
+                title="Forbidden",
+                detail="El onboarding ZEEP es exclusivo para empresas inversoras.",
+                status_code=403,
+            )
+        if not up.razon_social or not up.pais_origen:
+            raise DomainException(
+                title="Perfil incompleto",
+                detail="Complete razón social y país de origen en su perfil de empresa.",
+                status_code=422,
+            )
+        return up
+
     def create_profile(self, dto: OnboardingCreateDTO, user_id: uuid.UUID) -> InvestorProfile:
-        self._ensure_simulation_session(dto, user_id)
+        user_profile = self._load_inversor_profile(user_id)
+
+        self._ensure_simulation_session(dto, user_id, user_profile.pais_origen or "PE")
+        monto = dto.proyecto_monto_usd if dto.proyecto_monto_usd and dto.proyecto_monto_usd > 0 else Decimal("0")
+
+        rep_parts = (user_profile.rep_legal_nombre_pasaporte or "").split("|", 1)
+        rep_nombre = rep_parts[0].strip() if rep_parts else None
+        rep_doc = rep_parts[1].strip() if len(rep_parts) > 1 else None
+
         roadmap = self._default_roadmap()
         profile = InvestorProfile(
             session_id=dto.session_id,
             user_id=user_id,
             roadmap=roadmap,
-            empresa_razon_social=dto.empresa_razon_social,
-            empresa_pais_origen=dto.empresa_pais_origen,
-            empresa_registro_extranjero=dto.empresa_registro_extranjero,
-            empresa_sector_ciiu=dto.empresa_sector_ciiu,
-            empresa_capital_usd=dto.empresa_capital_usd,
-            rep_nombre=dto.rep_nombre,
-            rep_documento_tipo=dto.rep_documento_tipo,
-            rep_documento_num=dto.rep_documento_num,
-            rep_cargo=dto.rep_cargo,
+            empresa_razon_social=user_profile.razon_social,
+            empresa_pais_origen=user_profile.pais_origen,
+            empresa_registro_extranjero=user_profile.tax_id_internacional,
+            rep_nombre=rep_nombre,
+            rep_documento_tipo="pasaporte" if rep_doc else None,
+            rep_documento_num=rep_doc,
             proyecto_nombre=dto.proyecto_nombre,
             proyecto_descripcion=dto.proyecto_descripcion,
-            proyecto_monto_usd=dto.proyecto_monto_usd,
+            proyecto_monto_usd=monto,
             proyecto_empleo_directo=dto.proyecto_empleo_directo,
             proyecto_empleo_indirecto=dto.proyecto_empleo_indirecto,
             proyecto_porcentaje_cl=dto.proyecto_porcentaje_cl,
-            proyecto_duracion_meses=dto.proyecto_duracion_meses,
             proyecto_exportacion_pct=dto.proyecto_exportacion_pct,
             sector=dto.sector,
+            perfil_tecnico={
+                "area_terreno_m2": float(dto.proyecto_area_terreno_m2)
+                if dto.proyecto_area_terreno_m2
+                else None,
+                "teus_estimados": dto.proyecto_teus_estimados,
+                "documento_perfil_url": dto.documento_perfil_url,
+            },
         )
         self.session.add(profile)
         self.session.commit()
@@ -127,13 +159,13 @@ class OnboardingService:
                     ProjectCreateDTO(
                         nombre=dto.proyecto_nombre,
                         sector=dto.sector,
-                        monto_usd=dto.proyecto_monto_usd,
+                        monto_usd=monto if monto > 0 else Decimal("1000000"),
                         empleo_directo=dto.proyecto_empleo_directo,
                         empleo_indirecto=dto.proyecto_empleo_indirecto or 0,
                         porcentaje_cl=dto.proyecto_porcentaje_cl,
                         exportacion_pct=dto.proyecto_exportacion_pct,
-                        pais_origen_capital=dto.empresa_pais_origen,
-                        empresa_razon_social=dto.empresa_razon_social,
+                        pais_origen_capital=user_profile.pais_origen,
+                        empresa_razon_social=user_profile.razon_social,
                         descripcion=dto.proyecto_descripcion,
                     ),
                     user_id,

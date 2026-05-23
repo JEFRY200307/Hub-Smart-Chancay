@@ -48,6 +48,7 @@ class TipoDocumento(str, Enum):
     certificacion_tecnica = "certificacion_tecnica"
     registro_empresa_origen = "registro_empresa_origen"
     plan_idi = "plan_idi"
+    perfil_proyecto = "perfil_proyecto"
     otro = "otro"
 
 

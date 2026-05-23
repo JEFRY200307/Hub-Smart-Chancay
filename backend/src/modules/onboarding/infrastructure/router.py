@@ -93,8 +93,18 @@ async def upload_document(
     content = await file.read()
     if len(content) > MAX_DOC_BYTES:
         raise DomainException(title="Payload Too Large", detail="Máximo 10 MB.", status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE)
-    if file.content_type not in ("application/pdf", "application/octet-stream"):
-        raise DomainException(title="Unsupported Media Type", detail="Solo PDF.", status_code=status.HTTP_415_UNSUPPORTED_MEDIA_TYPE)
+    allowed = (
+        "application/pdf",
+        "application/octet-stream",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/msword",
+    )
+    if file.content_type not in allowed:
+        raise DomainException(
+            title="Unsupported Media Type",
+            detail="Solo PDF o Word (.doc, .docx).",
+            status_code=status.HTTP_415_UNSUPPORTED_MEDIA_TYPE,
+        )
 
     url, digest, size = save_upload(content, file.filename or "documento.pdf")
     doc = svc.attach_document(

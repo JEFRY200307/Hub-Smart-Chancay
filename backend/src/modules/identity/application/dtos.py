@@ -13,9 +13,39 @@ class RegisterRequestDTO(BaseModel):
     email: str
     password: str = Field(..., min_length=8)
     full_name: str
-    role: str = "inversor"
+    profile_type: str = Field(
+        ...,
+        pattern="^(ingeniero|abogado|empresa_inversora|empresa_local)$",
+    )
     phone: Optional[str] = None
     preferred_lang: str = "es"
+    numero_cip: Optional[str] = None
+    numero_cal: Optional[str] = None
+    razon_social: Optional[str] = None
+    ruc: Optional[str] = None
+    pais_origen: Optional[str] = Field(default=None, min_length=2, max_length=2)
+    tax_id_internacional: Optional[str] = None
+    rep_legal_nombre_pasaporte: Optional[str] = None
+
+
+class UserProfileDTO(BaseModel):
+    profile_type: str
+    numero_cip: Optional[str] = None
+    numero_cal: Optional[str] = None
+    razon_social: Optional[str] = None
+    ruc: Optional[str] = None
+    pais_origen: Optional[str] = None
+    tax_id_internacional: Optional[str] = None
+    rep_legal_nombre_pasaporte: Optional[str] = None
+    profile_completed: bool = False
+    can_access_onboarding: bool = False
+
+
+class UpdateUserProfileDTO(BaseModel):
+    pais_origen: Optional[str] = Field(default=None, min_length=2, max_length=2)
+    tax_id_internacional: Optional[str] = None
+    rep_legal_nombre_pasaporte: Optional[str] = None
+    razon_social: Optional[str] = None
 
 
 class LoginResponseDTO(BaseModel):
@@ -42,6 +72,7 @@ class UserMeDTO(BaseModel):
     preferred_lang: str
     last_login_at: Optional[str] = None
     created_at: Optional[str] = None
+    profile: Optional[UserProfileDTO] = None
 
     model_config = ConfigDict(from_attributes=True)
 
