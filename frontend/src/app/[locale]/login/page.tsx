@@ -23,7 +23,13 @@ export default async function Login({ params }: { params: Promise<{ locale: stri
 
       <main className="flex-grow flex items-stretch min-h-screen">
         {/* Visual Anchor */}
-        <section className="hidden lg:flex w-1/2 relative items-end p-16" style={{ backgroundImage: "linear-gradient(to top, rgba(165, 28, 28, 0.95), rgba(165, 28, 28, 0.4)), url('https://images.unsplash.com/photo-1599839619722-39751411ea63?q=80&w=2070&auto=format&fit=crop')" }}>
+        <section
+          className="hidden lg:flex w-1/2 relative items-end p-16 bg-cover bg-center"
+          style={{
+            backgroundImage:
+              "linear-gradient(to top, rgba(165, 28, 28, 0.92), rgba(165, 28, 28, 0.45)), url('/portada.png')",
+          }}
+        >
           <div className="relative z-10 max-w-xl">
             <span className="text-white/80 text-[10px] font-bold uppercase tracking-[0.3em] mb-4 block italic">{t('institutionalInfrastructure')}</span>
             <h1 className="text-white font-headline text-6xl font-black tracking-tighter mb-6 leading-[0.9] uppercase italic">

@@ -40,15 +40,16 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 
       {/* 2. Hero Section */}
       <section className="relative min-h-[90vh] flex flex-col justify-center px-6 md:px-24 pt-24 pb-16 w-full">
-        {/* Background Image Placeholder (Barco/Océano) */}
         <div className="absolute inset-0 z-0">
-          <img 
-            src="https://images.unsplash.com/photo-1599839619722-39751411ea63?q=80&w=2070&auto=format&fit=crop" 
-            alt="Puerto de Chancay Océano" 
-            className="w-full h-full object-cover"
+          <Image
+            src="/portada.png"
+            alt="Puerto de Chancay — ZEEP COMEX.AI"
+            fill
+            priority
+            className="object-cover object-center"
+            sizes="100vw"
           />
-          {/* Degradado para oscurecer un poco y permitir lectura */}
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-900/50 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-900/55 to-slate-900/25" />
         </div>
         
         <div className="relative z-10 max-w-2xl text-white">
