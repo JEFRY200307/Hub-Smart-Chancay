@@ -1,18 +1,59 @@
-from pydantic import BaseModel, ConfigDict
+from __future__ import annotations
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Optional
+from decimal import Decimal
 import uuid
 
-class ProfileSubmitDTO(BaseModel):
-    sector: str
-    investment_usd: float
-    required_sqm: float
-    capital_origin: str
 
-class OnboardingResultsDTO(BaseModel):
+class OnboardingCreateDTO(BaseModel):
+    session_id: uuid.UUID
+    empresa_razon_social: str = Field(..., max_length=500)
+    empresa_pais_origen: str = Field(..., min_length=2, max_length=2, description="Código ISO 3166-1 alpha-2")
+    empresa_registro_extranjero: Optional[str] = None
+    empresa_sector_ciiu: Optional[str] = None
+    empresa_capital_usd: Optional[Decimal] = None
+
+    rep_nombre: Optional[str] = None
+    rep_documento_tipo: Optional[str] = None
+    rep_documento_num: Optional[str] = None
+    rep_cargo: Optional[str] = None
+
+    proyecto_nombre: str = Field(..., max_length=500)
+    proyecto_descripcion: Optional[str] = None
+    proyecto_monto_usd: Decimal
+    proyecto_empleo_directo: int = 0
+    proyecto_empleo_indirecto: int = 0
+    proyecto_porcentaje_cl: Decimal = Decimal("0")
+    proyecto_duracion_meses: Optional[int] = None
+    proyecto_exportacion_pct: Optional[Decimal] = None
+
+    sector: str = Field(..., description="manufactura | ckd | tech")
+
+
+class OnboardingUpdateDTO(BaseModel):
+    empresa_capital_usd: Optional[Decimal] = None
+    rep_nombre: Optional[str] = None
+    rep_documento_tipo: Optional[str] = None
+    rep_documento_num: Optional[str] = None
+    rep_cargo: Optional[str] = None
+    proyecto_empleo_directo: Optional[int] = None
+    proyecto_empleo_indirecto: Optional[int] = None
+    proyecto_porcentaje_cl: Optional[Decimal] = None
+    proyecto_duracion_meses: Optional[int] = None
+    perfil_tecnico: Optional[dict] = None
+    completion_pct: Optional[int] = None
+
+
+class InvestorProfileDTO(BaseModel):
     id: uuid.UUID
-    eligibility_score: int
-    income_tax_exemption_years: int
-    tariff_savings_percentage: float
-    ideal_lot_sector: str
-    
+    session_id: uuid.UUID
+    user_id: uuid.UUID
+    estado: str
+    completion_pct: int
+    empresa_razon_social: str
+    proyecto_nombre: str
+    proyecto_monto_usd: Decimal
+    sector: str
+    created_at: str
+
     model_config = ConfigDict(from_attributes=True)

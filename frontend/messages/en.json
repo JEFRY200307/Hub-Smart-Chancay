@@ -1,8 +1,8 @@
 {
   "Common": {
-    "title": "P.L.A.I.A.",
-    "subtitle": "Legality, Leasing and Automated Installation Platform",
-    "login": "CIP Access",
+    "title": "COMEX.AI",
+    "subtitle": "Intelligent foreign trade · ZEEP Chancay",
+    "login": "Sign in",
     "signIn": "Sign In",
     "logout": "Log Out"
   },
@@ -19,7 +19,7 @@
     "services": "Services"
   },
   "Hero": {
-    "badge": "CIP Lima Technical Support",
+    "badge": "COMEX.AI · ZEEP Chancay",
     "title": "Simplify your entry to ZEEP Chancay with AI",
     "subtitle": "Navigate the technical and legal complexity of South America's largest port hub with artificial intelligence designed by engineers for engineers.",
     "ctaStart": "[Start Smart Diagnosis (3 min)]",
@@ -34,8 +34,8 @@
     "installedCapacity": "AI Installed Capacity"
   },
   "Footer": {
-    "brand": "P.L.A.I.A.",
-    "copyright": "© 2024 College of Engineers of Peru - Lima. P.L.A.I.A.: The Institutional Vanguard.",
+    "brand": "COMEX.AI",
+    "copyright": "© 2025 COMEX.AI — Sovereign foreign trade hub · ZEEP Chancay.",
     "resources": "Resources",
     "contact": "Direct Contact",
     "qualitySeal": "Quality Seal"

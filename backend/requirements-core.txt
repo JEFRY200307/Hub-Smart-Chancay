@@ -1,0 +1,18 @@
+# Dependencias mínimas para API + Alembic (imagen Docker más rápida)
+fastapi[all]>=0.110.0
+pydantic>=2.0
+sqlalchemy>=2.0
+sqlmodel>=0.0.22
+psycopg2-binary>=2.9
+python-dotenv>=1.0
+python-jose[cryptography]>=3.3
+passlib[bcrypt]>=1.7
+bcrypt==4.0.1
+alembic>=1.13
+apscheduler>=3.10
+python-multipart>=0.0.18
+groq>=0.9
+tavily-python>=0.3
+requests>=2.31
+pandas>=2.0
+PyPDF2>=3.0

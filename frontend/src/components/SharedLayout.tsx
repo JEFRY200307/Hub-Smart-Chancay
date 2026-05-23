@@ -1,111 +1,293 @@
-'use client';
+"use client";
+
 import { Link } from "@/navigation";
-import React from "react";
-import Image from "next/image";
-import { useTranslations } from 'next-intl';
+import React, { useCallback, useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import LocaleSwitcher from "./LocaleSwitcher";
+import BrandLogo from "./BrandLogo";
+import AuthNavButton from "./AuthNavButton";
 
-export default function SharedLayout({ children }: { children: React.ReactNode }) {
-  const t = useTranslations('Navigation');
-  const c = useTranslations('Common');
+const HEADER_H = 72;
+const SIDEBAR_EXPANDED = 256;
+const SIDEBAR_COLLAPSED = 72;
+const STORAGE_KEY = "comex-sidebar-collapsed";
 
+type NavItem = {
+  href: string;
+  icon: string;
+  label: string;
+};
+
+function shellStyle(sidebarW: number): React.CSSProperties {
+  return {
+    ["--header-h" as string]: `${HEADER_H}px`,
+    ["--sidebar-w" as string]: `${sidebarW}px`,
+  };
+}
+
+function SidebarLink({
+  href,
+  icon,
+  label,
+  collapsed,
+  onNavigate,
+}: NavItem & { collapsed: boolean; onNavigate?: () => void }) {
   return (
-    <div className="flex bg-surface min-h-screen">
-      {/* Top Navigation Bar */}
-      <nav className="fixed top-0 w-full flex justify-between items-center px-8 py-4 max-w-full mx-auto bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-50 shadow-sm dark:shadow-none border-b border-slate-200/20">
-        <div className="flex items-center gap-8 lg:ml-64">
-          <div className="flex items-center gap-3">
-             <div className="h-8 w-8 relative flex-shrink-0">
-              <Image 
-                src="/logo-cip.png" 
-                alt="Logo CIP" 
-                fill 
-                className="object-contain"
-                priority
-              />
+    <Link
+      href={href}
+      onClick={onNavigate}
+      title={collapsed ? label : undefined}
+      className={`group flex items-center rounded-lg mx-2 py-2.5 text-slate-700 hover:bg-slate-100 hover:text-[#E31E24] transition-colors ${
+        collapsed ? "justify-center px-2" : "gap-3 px-4"
+      }`}
+    >
+      <span className="material-symbols-outlined text-[22px] shrink-0 text-slate-600 group-hover:text-[#E31E24]">
+        {icon}
+      </span>
+      {!collapsed && (
+        <span className="text-xs font-bold uppercase tracking-wide leading-snug">
+          {label}
+        </span>
+      )}
+    </Link>
+  );
+}
+
+export default function SharedLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const t = useTranslations("Navigation");
+  const c = useTranslations("Common");
+  const [collapsed, setCollapsed] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    setCollapsed(localStorage.getItem(STORAGE_KEY) === "1");
+    setHydrated(true);
+  }, []);
+
+  const toggleCollapsed = useCallback(() => {
+    setCollapsed((prev) => {
+      const next = !prev;
+      localStorage.setItem(STORAGE_KEY, next ? "1" : "0");
+      return next;
+    });
+  }, []);
+
+  const closeMobile = useCallback(() => setMobileOpen(false), []);
+
+  const sidebarW = collapsed ? SIDEBAR_COLLAPSED : SIDEBAR_EXPANDED;
+  const style = shellStyle(sidebarW);
+
+  const mainNav: NavItem[] = [
+    { href: "/dashboard", icon: "dashboard", label: t("dashboard") },
+    { href: "/dashboard/portfolio", icon: "folder_open", label: "Portafolio" },
+    { href: "/simulacion", icon: "analytics", label: "Simulación ZEEP" },
+    { href: "/", icon: "location_on", label: t("benefits") },
+    { href: "/operators", icon: "anchor", label: t("port") },
+    { href: "/match", icon: "handshake", label: t("match") },
+    { href: "/onboarding", icon: "assignment", label: "Onboarding" },
+    { href: "/dashboard/validator", icon: "verified", label: "Ledger" },
+    { href: "/dashboard/concierge", icon: "groups", label: "Concierge" },
+    { href: "/legal-ai", icon: "gavel", label: t("legalAi") },
+    { href: "/services", icon: "business_center", label: t("services") },
+  ];
+
+  const topNavLinks = (
+    <>
+      <Link
+        href="/"
+        className="text-slate-700 hover:text-[#E31E24] transition-colors whitespace-nowrap"
+      >
+        {t("benefits")}
+      </Link>
+      <Link
+        href="/operators"
+        className="text-slate-700 hover:text-[#E31E24] transition-colors whitespace-nowrap"
+      >
+        {t("port")}
+      </Link>
+      <Link
+        href="/simulacion"
+        className="text-slate-700 hover:text-[#E31E24] transition-colors whitespace-nowrap"
+      >
+        Simulación
+      </Link>
+      <Link
+        href="/match"
+        className="text-slate-700 hover:text-[#E31E24] transition-colors whitespace-nowrap"
+      >
+        {t("match")}
+      </Link>
+      <Link
+        href="/legal-ai"
+        className="text-slate-700 hover:text-[#E31E24] transition-colors whitespace-nowrap"
+      >
+        {t("legalAi")}
+      </Link>
+      <Link
+        href="/services"
+        className="text-slate-700 hover:text-[#E31E24] transition-colors whitespace-nowrap"
+      >
+        {t("services")}
+      </Link>
+    </>
+  );
+
+  const sidebarContent = (opts: {
+    collapsed: boolean;
+    onNavigate?: () => void;
+    showBrandHeader?: boolean;
+  }) => (
+    <>
+      {opts.showBrandHeader !== false && (
+        <div
+          className={`flex items-center border-b border-slate-200/80 shrink-0 ${
+            opts.collapsed ? "flex-col gap-2 py-3 px-2" : "justify-between gap-2 py-4 px-3"
+          }`}
+        >
+          {!opts.collapsed && (
+            <div className="min-w-0 flex-1 pl-1">
+              <BrandLogo href="/" height={26} />
+              <p className="text-[10px] font-bold text-slate-600 uppercase tracking-wider mt-2 leading-tight">
+                {c("subtitle")}
+              </p>
             </div>
-            <span className="text-xl font-bold tracking-tighter text-slate-800 dark:text-white">
-              {c('title')}
+          )}
+          {opts.collapsed && <BrandLogo href="/" height={24} />}
+          <button
+            type="button"
+            onClick={toggleCollapsed}
+            className="hidden lg:flex items-center justify-center w-9 h-9 rounded-lg border border-slate-200 bg-slate-50 text-slate-700 hover:bg-[#E31E24]/10 hover:text-[#E31E24] hover:border-[#E31E24]/30 transition-colors shrink-0"
+            aria-label={opts.collapsed ? "Expandir menú lateral" : "Contraer menú lateral"}
+            title={opts.collapsed ? "Expandir menú" : "Contraer menú"}
+          >
+            <span className="material-symbols-outlined text-xl">
+              {opts.collapsed ? "chevron_right" : "chevron_left"}
             </span>
-          </div>
-          <div className="hidden md:flex items-center gap-6 text-[13px] font-semibold uppercase tracking-wider">
-            <Link href="/" className="text-slate-600 dark:text-slate-400 hover:text-red-700 dark:hover:text-red-500 transition-colors">
-              {t('benefits')}
-            </Link>
-            <Link href="/operators" className="text-slate-600 dark:text-slate-400 hover:text-red-700 dark:hover:text-red-500 transition-colors">
-              {t('port')}
-            </Link>
-            <Link href="/dashboard/match" className="text-slate-600 dark:text-slate-400 hover:text-red-700 dark:hover:text-red-500 transition-colors">
-              {t('match')}
-            </Link>
-            <Link href="/dashboard/legal-ai" className="text-slate-600 dark:text-slate-400 hover:text-red-700 dark:hover:text-red-500 transition-colors">
-              {t('legalAi')}
-            </Link>
-            <Link href="/services" className="text-slate-600 dark:text-slate-400 hover:text-red-700 dark:hover:text-red-500 transition-colors">
-              {t('services')}
-            </Link>
-          </div>
+          </button>
         </div>
-        <div className="flex items-center gap-6">
-          <LocaleSwitcher />
-          <div className="flex items-center gap-3">
-            <span className="material-symbols-outlined text-slate-600 cursor-pointer hover:bg-slate-100/50 p-2 rounded-full transition-all">notifications</span>
-            <span className="material-symbols-outlined text-slate-600 cursor-pointer hover:bg-slate-100/50 p-2 rounded-full transition-all">account_circle</span>
-          </div>
-          <Link href="/login" className="bg-[#b91c1c] text-white px-5 py-2 rounded-sm font-bold text-xs uppercase tracking-widest hover:opacity-90 active:scale-95 transition-transform inline-block">
-            {c('login')}
-          </Link>
-        </div>
+      )}
+
+      <nav className="flex-1 overflow-y-auto overflow-x-hidden py-3 space-y-0.5">
+        {mainNav.map((item) => (
+          <SidebarLink
+            key={`${item.href}-${item.label}`}
+            {...item}
+            collapsed={opts.collapsed}
+            onNavigate={opts.onNavigate}
+          />
+        ))}
       </nav>
 
-      {/* Side Navigation Bar */}
-      <aside className="hidden lg:flex flex-col fixed left-0 top-0 h-full py-8 w-64 bg-white dark:bg-slate-950 border-r border-slate-200/30 z-40 mt-[72px]">
-        <div className="px-6 mb-8">
-          <h2 className="text-lg font-black text-[#a51c1c] uppercase tracking-tighter">{c('title')}</h2>
-          <p className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] leading-tight mt-1">{c('subtitle')}</p>
+      <div
+        className={`shrink-0 border-t border-slate-200/80 py-3 space-y-0.5 ${
+          opts.collapsed ? "px-1" : "px-2"
+        }`}
+      >
+        <SidebarLink
+          href="#"
+          icon="settings"
+          label="Settings"
+          collapsed={opts.collapsed}
+          onNavigate={opts.onNavigate}
+        />
+        <SidebarLink
+          href="#"
+          icon="help_outline"
+          label="Support"
+          collapsed={opts.collapsed}
+          onNavigate={opts.onNavigate}
+        />
+      </div>
+    </>
+  );
+
+  return (
+    <div className="min-h-screen bg-surface" style={hydrated ? style : shellStyle(SIDEBAR_EXPANDED)}>
+      {/* Barra superior */}
+      <header
+        className="fixed top-0 left-0 right-0 z-50 flex h-[var(--header-h)] items-center justify-between gap-4 border-b border-slate-200/80 bg-white/95 backdrop-blur-md px-4 sm:px-6 shadow-sm"
+        style={hydrated ? style : undefined}
+      >
+        <div
+          className="flex min-w-0 flex-1 items-center gap-3 lg:gap-6 transition-[padding] duration-300 ease-in-out lg:pl-[var(--sidebar-w)]"
+        >
+          <button
+            type="button"
+            className="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-100"
+            onClick={() => setMobileOpen(true)}
+            aria-label="Abrir menú"
+          >
+            <span className="material-symbols-outlined">menu</span>
+          </button>
+          <BrandLogo href="/" height={30} priority className="shrink-0" />
+          <nav className="hidden xl:flex items-center gap-5 text-[12px] font-semibold uppercase tracking-wider overflow-x-auto">
+            {topNavLinks}
+          </nav>
         </div>
-        <nav className="flex-1 space-y-1">
-          <Link href="/dashboard" className="flex items-center gap-3 px-6 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-50 hover:text-red-700 hover:translate-x-1 transition-all">
-            <span className="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span>
-            <span className="text-xs font-bold uppercase tracking-widest">{t('dashboard')}</span>
-          </Link>
-          <Link href="/" className="flex items-center gap-3 px-6 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-50 hover:text-red-700 hover:translate-x-1 transition-all">
-            <span className="material-symbols-outlined text-[20px]" data-icon="location_on">location_on</span>
-            <span className="text-xs font-bold uppercase tracking-widest">{t('benefits')}</span>
-          </Link>
-          <Link href="/operators" className="flex items-center gap-3 px-6 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-50 hover:text-red-700 hover:translate-x-1 transition-all">
-            <span className="material-symbols-outlined text-[20px]" data-icon="anchor">anchor</span>
-            <span className="text-xs font-bold uppercase tracking-widest">{t('port')}</span>
-          </Link>
-          <Link href="/dashboard/match" className="flex items-center gap-3 px-6 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-50 hover:text-red-700 hover:translate-x-1 transition-all">
-            <span className="material-symbols-outlined text-[20px]" data-icon="handshake">handshake</span>
-            <span className="text-xs font-bold uppercase tracking-widest">{t('match')}</span>
-          </Link>
-          <Link href="/dashboard/legal-ai" className="flex items-center gap-3 px-6 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-50 hover:text-red-700 hover:translate-x-1 transition-all">
-            <span className="material-symbols-outlined text-[20px]" data-icon="gavel">gavel</span>
-            <span className="text-xs font-bold uppercase tracking-widest">{t('legalAi')}</span>
-          </Link>
-          <Link href="/services" className="flex items-center gap-3 px-6 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-50 hover:text-red-700 hover:translate-x-1 transition-all">
-            <span className="material-symbols-outlined text-[20px]" data-icon="business_center">business_center</span>
-            <span className="text-xs font-bold uppercase tracking-widest">{t('services')}</span>
-          </Link>
-        </nav>
-        <div className="mt-auto px-6 space-y-1 border-t border-slate-200/10 pt-4">
-          <Link href="#" className="flex items-center gap-3 py-2 text-slate-500 hover:text-slate-900 transition-colors">
-            <span className="material-symbols-outlined text-sm" data-icon="settings">settings</span>
-            <span className="text-xs uppercase tracking-widest font-label">Settings</span>
-          </Link>
-          <Link href="#" className="flex items-center gap-3 py-2 text-slate-500 hover:text-slate-900 transition-colors">
-            <span className="material-symbols-outlined text-sm" data-icon="help_outline">help_outline</span>
-            <span className="text-xs uppercase tracking-widest font-label">Support</span>
-          </Link>
+        <div className="flex shrink-0 items-center gap-2 sm:gap-4">
+          <LocaleSwitcher />
+          <span className="material-symbols-outlined hidden sm:inline text-slate-600 cursor-pointer hover:bg-slate-100 p-2 rounded-full">
+            notifications
+          </span>
+          <span className="material-symbols-outlined hidden sm:inline text-slate-600 cursor-pointer hover:bg-slate-100 p-2 rounded-full">
+            account_circle
+          </span>
+          <AuthNavButton loginLabel={c("login")} logoutLabel={c("logout")} />
         </div>
+      </header>
+
+      {/* Sidebar escritorio */}
+      <aside
+        className="hidden lg:flex flex-col fixed left-0 top-[var(--header-h)] z-40 h-[calc(100vh-var(--header-h))] bg-white border-r border-slate-200/80 shadow-sm transition-[width] duration-300 ease-in-out overflow-hidden"
+        style={{ width: hydrated ? sidebarW : SIDEBAR_EXPANDED }}
+      >
+        {sidebarContent({ collapsed })}
       </aside>
 
-      {/* Main Content Area */}
-      <div className="w-full">
+      {/* Sidebar móvil (overlay) */}
+      {mobileOpen && (
+        <div className="lg:hidden fixed inset-0 z-[60] flex">
+          <button
+            type="button"
+            className="absolute inset-0 bg-black/40"
+            aria-label="Cerrar menú"
+            onClick={closeMobile}
+          />
+          <aside className="relative flex flex-col w-[min(280px,85vw)] max-w-full h-full bg-white shadow-xl">
+            <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200">
+              <BrandLogo href="/" height={28} />
+              <button
+                type="button"
+                onClick={closeMobile}
+                className="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-slate-100 text-slate-700"
+                aria-label="Cerrar menú"
+              >
+                <span className="material-symbols-outlined">close</span>
+              </button>
+            </div>
+            <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
+              {sidebarContent({
+                collapsed: false,
+                onNavigate: closeMobile,
+                showBrandHeader: false,
+              })}
+            </div>
+          </aside>
+        </div>
+      )}
+
+      {/* Contenido principal — respeta header + sidebar */}
+      <main
+        className="min-h-screen w-full max-w-full overflow-x-hidden pt-[var(--header-h)] transition-[padding] duration-300 ease-in-out lg:pl-[var(--sidebar-w)]"
+        style={hydrated ? style : shellStyle(SIDEBAR_EXPANDED)}
+      >
         {children}
-      </div>
+      </main>
     </div>
   );
 }

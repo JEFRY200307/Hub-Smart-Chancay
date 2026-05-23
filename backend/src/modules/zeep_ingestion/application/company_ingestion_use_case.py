@@ -137,15 +137,14 @@ class CompanyIngestionUseCase:
                         estado_contribuyente=row['ESTADO'],
                         condicion_domicilio=row['CONDICION'],
                         ubigeo=row['UBIGEO'],
-                        sector_macro=row['Sector_Macro']
+                        sector_interno=row.get('Sector_Macro'),
                     )
                     session.add(company)
                 else:
                     # Update fields
                     company.razon_social = row['NOMBRE_RAZON_SOCIAL']
                     company.estado_contribuyente = row['ESTADO']
-                    company.condicion_domicilio = row['CONDICION']
-                    company.sector_macro = row['Sector_Macro']
+                    company.sector_interno = row.get('Sector_Macro')
                     session.add(company)
                     
             session.commit()

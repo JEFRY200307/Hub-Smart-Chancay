@@ -2,6 +2,7 @@ import { Link } from "@/navigation";
 import Image from "next/image";
 import { getTranslations } from 'next-intl/server';
 import LocaleSwitcher from "@/components/LocaleSwitcher";
+import BrandLogo from "@/components/BrandLogo";
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -15,21 +16,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       
       {/* 1. Navbar */}
       <nav className="absolute top-0 w-full flex justify-between items-center px-6 md:px-12 py-4 z-50 bg-white shadow-sm border-b border-slate-100">
-        <div className="flex items-center gap-3">
-          {/* Logo CIP */}
-          <div className="h-10 w-10 relative flex-shrink-0">
-            <Image 
-              src="/logo-cip.png" 
-              alt="Logo CIP Lima" 
-              fill 
-              className="object-contain"
-              priority
-            />
-          </div>
-          <span className="text-xl font-bold tracking-tighter">
-            <span className="text-[#a51c1c]">{c('title')}</span>
-          </span>
-        </div>
+        <BrandLogo href="/" height={40} priority />
         
         <div className="hidden md:flex items-center gap-8 text-[13px] font-bold uppercase tracking-widest">
           <Link href="/" className="text-red-700 border-b-2 border-red-600 pb-1">
@@ -86,7 +73,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="/onboarding" className="bg-[#cc1f1f] text-white px-8 py-5 rounded-sm font-bold uppercase tracking-widest hover:bg-[#b01818] transition-colors flex items-center justify-center gap-2 text-[12px] shadow-xl shadow-red-950/40">
+            <Link href="/simulacion" className="bg-[#E31E24] text-white px-8 py-5 rounded-sm font-bold uppercase tracking-widest hover:opacity-90 transition-colors flex items-center justify-center gap-2 text-[12px] shadow-xl shadow-red-950/40">
               {t('ctaStart')}
               <span className="material-symbols-outlined text-lg">bolt</span>
             </Link>
@@ -193,11 +180,11 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           ¿Listo para el futuro de la logística?
         </h2>
         <p className="text-slate-400 max-w-2xl mb-12 leading-relaxed font-bold uppercase tracking-widest text-xs relative z-10 italic">
-          Obtén un informe detallado sobre la viabilidad de tus operaciones en PLAIA bajo los parámetros del CIP Lima.
+          Obtén un informe detallado sobre la viabilidad de tus operaciones en COMEX.AI bajo los parámetros ZEEP Chancay.
         </p>
-        <button className="bg-[#cc1f1f] text-white font-black text-[12px] uppercase tracking-[0.3em] px-12 py-5 rounded-sm shadow-2xl shadow-red-950/50 hover:bg-[#b01818] transition-all hover:-translate-y-1 relative z-10">
+        <Link href="/simulacion" className="bg-[#E31E24] text-white font-black text-[12px] uppercase tracking-[0.3em] px-12 py-5 rounded-sm shadow-2xl shadow-red-950/50 hover:opacity-90 transition-all hover:-translate-y-1 relative z-10 inline-block">
           Comenzar Diagnóstico Institucional
-        </button>
+        </Link>
       </section>
 
       {/* 5. Footer */}
@@ -241,13 +228,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           {/* Quality Seal / Image Col */}
           <div className="flex flex-col">
             <h5 className="text-[10px] font-black text-slate-900 uppercase tracking-[0.25em] mb-8 border-l-2 border-red-600 pl-4">{f('qualitySeal')}</h5>
-            <div className="h-16 w-16 relative grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all cursor-pointer bg-slate-300 rounded p-1">
-              <Image 
-                src="/logo-cip.png" 
-                alt="Logo CIP Monocromático"
-                fill
-                className="object-contain"
-              />
+            <div className="opacity-80 hover:opacity-100 transition-all">
+              <BrandLogo height={48} />
             </div>
           </div>
 

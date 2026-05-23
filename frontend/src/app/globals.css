@@ -1,11 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #f6f9ff;
-  --color-on-background: #131d24;
-  --color-primary: #b9151e;
+  /* CIP Lima — Manual_identidad.md */
+  --color-cip-red: #E31E24;
+  --color-cip-gold: #D7B56D;
+  --color-cip-carbon: #2A2A29;
+
+  --color-background: #fafafa;
+  --color-on-background: #2A2A29;
+  --color-primary: #E31E24;
   --color-on-primary: #ffffff;
-  --color-primary-container: #dd3333;
+  --color-primary-container: #c41a20;
   --color-on-primary-container: #ffffff;
   --color-primary-fixed: #ffdad6;
   --color-primary-fixed-dim: #ffb3ac;
@@ -15,7 +20,7 @@
   --color-on-secondary-container: #5b666f;
   --color-secondary-fixed: #d9e4ef;
   --color-secondary-fixed-dim: #bdc8d2;
-  --color-tertiary: #645c4a;
+  --color-tertiary: #D7B56D;
   --color-on-tertiary: #ffffff;
   --color-tertiary-container: #7e7561;
   --color-on-tertiary-container: #ffffff;

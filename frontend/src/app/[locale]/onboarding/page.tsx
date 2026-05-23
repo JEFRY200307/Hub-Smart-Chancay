@@ -1,7 +1,9 @@
 import { Link } from "@/navigation";
-import Image from "next/image";
 import { getTranslations } from 'next-intl/server';
 import LocaleSwitcher from "@/components/LocaleSwitcher";
+import OnboardingForm from "@/components/OnboardingForm";
+import BrandLogo from "@/components/BrandLogo";
+import LogoutButton from "@/components/LogoutButton";
 
 export default async function OnboardingPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -15,8 +17,7 @@ export default async function OnboardingPage({ params }: { params: Promise<{ loc
       {/* TopNavBar */}
       <nav className="fixed top-0 w-full z-50 bg-white/80 dark:bg-[#131d24]/80 backdrop-blur-lg flex justify-between items-center px-12 h-20 max-w-[1920px] mx-auto border-b border-slate-200/20">
         <div className="flex items-center gap-4">
-          <Image alt="CIP Logo" className="h-10 w-auto object-contain" src="/logo-cip.png" width={40} height={40} />
-          <span className="text-xl font-black text-[#a51c1c] tracking-tighter uppercase font-headline italic">{c('title')}</span>
+          <BrandLogo href="/" height={36} priority />
         </div>
         <div className="hidden md:flex items-center gap-8">
           <Link href="/dashboard" className="text-slate-500 hover:text-[#a51c1c] transition-colors font-bold uppercase text-[11px] tracking-widest">{n('dashboard')}</Link>
@@ -26,10 +27,10 @@ export default async function OnboardingPage({ params }: { params: Promise<{ loc
         </div>
         <div className="flex items-center gap-4">
           <LocaleSwitcher />
-          <button className="flex items-center gap-2 px-5 py-2.5 rounded-sm bg-[#b91c1c] text-white font-bold text-[10px] uppercase tracking-widest hover:opacity-90 transition-all scale-100 active:scale-95 shadow-lg shadow-red-900/20">
-            <span className="material-symbols-outlined text-[16px]">logout</span>
-            {c('logout')}
-          </button>
+          <LogoutButton
+            label={c("logout")}
+            className="flex items-center gap-2 px-5 py-2.5 rounded-sm bg-[#b91c1c] text-white font-bold text-[10px] uppercase tracking-widest hover:opacity-90 transition-all shadow-lg shadow-red-900/20"
+          />
         </div>
       </nav>
 
@@ -54,7 +55,8 @@ export default async function OnboardingPage({ params }: { params: Promise<{ loc
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <OnboardingForm />
+        <div className="hidden grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left Side: AI Assistant Panel */}
           <aside className="lg:col-span-4 sticky top-32">
             <div className="bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-outline-variant/10">
@@ -195,7 +197,7 @@ export default async function OnboardingPage({ params }: { params: Promise<{ loc
         <div className="flex flex-col md:flex-row justify-between items-center px-12 py-10 w-full gap-6 max-w-[1920px] mx-auto">
            <div className="flex flex-col gap-2">
             <div className="flex items-center gap-3">
-              <span className="font-headline font-black text-[#a51c1c] uppercase tracking-tighter italic text-xl">{c('title')}</span>
+              <BrandLogo height={32} />
               <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
               <span className="text-slate-400 font-bold uppercase tracking-widest text-[10px]">{c('subtitle')}</span>
             </div>

@@ -1,8 +1,10 @@
-import React from 'react';
-import Image from 'next/image';
 import { Link } from "@/navigation";
 import { getTranslations } from 'next-intl/server';
 import LocaleSwitcher from "@/components/LocaleSwitcher";
+import { Suspense } from "react";
+import LoginPanel from "@/components/LoginPanel";
+import BrandLogo from "@/components/BrandLogo";
+import LoginNotice from "@/components/LoginNotice";
 
 export default async function Login({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -13,20 +15,7 @@ export default async function Login({ params }: { params: Promise<{ locale: stri
     <div className="bg-surface font-body text-on-surface min-h-screen flex flex-col">
       {/* Top Navigation */}
       <nav className="fixed top-0 w-full z-50 flex justify-between items-center px-8 py-6 bg-white/5 backdrop-blur-md">
-        <div className="flex items-center gap-3">
-          <div className="h-8 w-8 relative flex-shrink-0">
-            <Image 
-              src="/logo-cip.png" 
-              alt="Logo CIP" 
-              fill 
-              className="object-contain"
-              priority
-            />
-          </div>
-          <div className="text-xl font-black tracking-tighter text-slate-800 font-headline uppercase italic">
-            {c('title')}
-          </div>
-        </div>
+        <BrandLogo href="/" height={36} priority />
         <div className="hidden md:flex gap-8 items-center">
           <LocaleSwitcher />
         </div>
@@ -64,42 +53,15 @@ export default async function Login({ params }: { params: Promise<{ locale: stri
               <p className="text-slate-500 font-bold text-sm uppercase tracking-wider italic">{t('accessSubtitle')}</p>
             </div>
 
-            <form className="space-y-6">
-              <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1 italic">{t('corporateRuc')}</label>
-                <div className="relative">
-                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-300">corporate_fare</span>
-                  <input className="w-full pl-12 pr-4 py-5 bg-slate-50 border border-slate-200 focus:border-red-600 rounded-sm text-slate-900 outline-none transition-all font-bold placeholder:text-slate-300" placeholder="20XXXXXXXXX" type="text" />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <div className="flex justify-between items-center ml-1">
-                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 italic">{t('password')}</label>
-                  <Link href="#" className="text-[10px] font-black uppercase tracking-widest text-red-700 hover:underline transition-all italic">{t('forgotPassword')}</Link>
-                </div>
-                <div className="relative">
-                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-300">lock</span>
-                  <input className="w-full pl-12 pr-12 py-5 bg-slate-50 border border-slate-200 focus:border-red-600 rounded-sm text-slate-900 outline-none transition-all font-bold placeholder:text-slate-300" placeholder="••••••••••••" type="password" />
-                  <button className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-300 hover:text-red-700 transition-colors" type="button">
-                    <span className="material-symbols-outlined text-xl">visibility</span>
-                  </button>
-                </div>
-              </div>
-
-              <Link href="/dashboard/results" className="w-full py-5 bg-[#b91c1c] text-white font-black uppercase tracking-[0.4em] text-[12px] rounded-sm hover:bg-red-800 transition-all shadow-xl shadow-red-900/20 flex justify-center items-center gap-3 italic">
-                <span>{t('secureAccess')}</span>
-                <span className="material-symbols-outlined text-lg">login</span>
-              </Link>
-              
-              <div className="text-center pt-8 border-t border-slate-100 mt-10">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-6 italic">{t('notAccredited')}</p>
-                <Link href="#" className="w-full py-4 bg-white text-slate-900 font-black uppercase tracking-[0.2em] text-[11px] rounded-sm hover:bg-slate-50 transition-all border border-slate-200 flex justify-center items-center gap-2 italic">
-                  <span className="material-symbols-outlined text-lg">domain_add</span>
-                  <span>{t('registerCompany')}</span>
-                </Link>
-              </div>
-            </form>
+            <Suspense fallback={null}>
+              <LoginNotice />
+            </Suspense>
+            <LoginPanel />
+            <p className="text-center text-[10px] text-slate-400 mt-6 italic leading-relaxed">
+              Demo Perú: inversor@hubchancay.pe / HubChancay2025!
+              <br />
+              Empresa extranjera (CN): extranjera.cn@comex-ai.test / ComexExtranjera2025!
+            </p>
           </div>
         </section>
       </main>

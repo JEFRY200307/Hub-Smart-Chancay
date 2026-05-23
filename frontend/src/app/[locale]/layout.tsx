@@ -16,8 +16,16 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'P.L.A.I.A. | Plataforma de Legalidad, Arrendamiento e Instalación Automatizada',
-  description: 'Plataforma institucional de soporte técnico y legal para la Zona Económica Especial de Chancay - Respaldo CIP Lima.',
+  title: {
+    default: 'COMEX.AI | Comercio exterior inteligente · ZEEP Chancay',
+    template: '%s | COMEX.AI',
+  },
+  description:
+    'COMEX.AI — plataforma de comercio exterior con IA para inversión, matchmaking y asesoría legal en la Zona Económica Especial de Chancay.',
+  icons: {
+    icon: '/logo-comex.png',
+    apple: '/logo-comex.png',
+  },
 }
 
 export default async function RootLayout({
@@ -34,7 +42,7 @@ export default async function RootLayout({
     <html lang={locale}>
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logo-comex.png" type="image/png" />
       </head>
       <body className={`${publicSans.variable} ${inter.variable} bg-surface text-on-surface font-body antialiased selection:bg-red-500/30`}>
         <NextIntlClientProvider messages={messages}>

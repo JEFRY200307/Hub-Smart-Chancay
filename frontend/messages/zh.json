@@ -1,8 +1,8 @@
 {
   "Common": {
-    "title": "P.L.A.I.A.",
-    "subtitle": "法律、租赁与自动化安装平台",
-    "login": "CIP 访问",
+    "title": "COMEX.AI",
+    "subtitle": "智能外贸 · 钱凯经济特区",
+    "login": "登录",
     "signIn": "登录",
     "logout": "登出"
   },
@@ -19,7 +19,7 @@
     "services": "服务"
   },
   "Hero": {
-    "badge": "秘鲁工程师学院 (CIP) 利马技术支持",
+    "badge": "COMEX.AI · 钱凯经济特区",
     "title": "人工智能助手简化您的钱凯经济特区准入",
     "subtitle": "利用工程师为工程师设计的人工智能，驾驭南美最大港口枢纽的法律和技术复杂性。",
     "ctaStart": "[开始智能诊断 (3 分钟)]",
@@ -34,8 +34,8 @@
     "installedCapacity": "人工智能装机容量"
   },
   "Footer": {
-    "brand": "P.L.A.I.A.",
-    "copyright": "© 2024 秘鲁工程师学院 - 利马。P.L.A.I.A.：机构先锋。",
+    "brand": "COMEX.AI",
+    "copyright": "© 2025 COMEX.AI — 主权外贸枢纽 · 钱凯经济特区。",
     "resources": "资源",
     "contact": "直接联系",
     "qualitySeal": "质量印章"

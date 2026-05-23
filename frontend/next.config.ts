@@ -6,7 +6,7 @@ const withNextIntl = createNextIntlPlugin(
  
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone'
+  output: "standalone" as const,
 };
  
 export default withNextIntl(nextConfig);

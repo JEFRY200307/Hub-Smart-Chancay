@@ -1,8 +1,8 @@
 {
   "Common": {
-    "title": "P.L.A.I.A.",
-    "subtitle": "Plataforma de Legalidad, Arrendamiento e Instalación Automatizada",
-    "login": "Acceso CIP",
+    "title": "COMEX.AI",
+    "subtitle": "Comercio exterior inteligente · ZEEP Chancay",
+    "login": "Acceso",
     "signIn": "Iniciar Sesión",
     "logout": "Cerrar Sesión"
   },
@@ -19,7 +19,7 @@
     "services": "Servicios"
   },
   "Hero": {
-    "badge": "Respaldo Técnico CIP Lima",
+    "badge": "COMEX.AI · ZEEP Chancay",
     "title": "Simplifica tu entrada a la ZEEP Chancay con IA",
     "subtitle": "Navega la complejidad técnica y legal del mayor hub portuario de Sudamérica con inteligencia artificial diseñada por ingenieros para ingenieros.",
     "ctaStart": "[Iniciar Diagnóstico Inteligente (3 min)]",
@@ -34,8 +34,8 @@
     "installedCapacity": "Capacidad Instalada IA"
   },
   "Footer": {
-    "brand": "P.L.A.I.A.",
-    "copyright": "© 2024 Colegio de Ingenieros del Perú - Lima. P.L.A.I.A.: The Institutional Vanguard.",
+    "brand": "COMEX.AI",
+    "copyright": "© 2025 COMEX.AI — Hub soberano de comercio exterior · ZEEP Chancay.",
     "resources": "Recursos",
     "contact": "Contacto Directo",
     "qualitySeal": "Sello de Calidad"

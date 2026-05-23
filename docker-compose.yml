@@ -1,55 +1,59 @@
+# COMEX.AI / Sovereign Gateway — backend local (Supabase + ChromaDB)
+#
+# Uso:
+#   docker compose up --build -d
+#
+# Frontend: NO va en Docker (despliegue en Vercel).
+#   Desarrollo local: cd frontend && npm run dev  → http://localhost:3000
+#   Variable: NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
+#
+# BD: Supabase (backend/.env) — sin PostgreSQL en Docker
+
 services:
-  db:
-    image: ankane/pgvector:v0.5.1
-    container_name: sovereing_gateway_db
-    environment:
-      POSTGRES_USER: chancay_admin
-      POSTGRES_PASSWORD: chancay_password
-      POSTGRES_DB: sovereign_gateway
+  chromadb:
+    image: chromadb/chroma:0.5.23
+    container_name: sovereign_gateway_chroma
     ports:
-      - "5432:5432"
+      - "${CHROMA_PORT:-8001}:8000"
     volumes:
-      - pgdata:/var/lib/postgresql/data
-    restart: always
+      - chroma_data:/chroma/chroma
+    environment:
+      ANONYMIZED_TELEMETRY: "false"
+      IS_PERSISTENT: "true"
+    restart: unless-stopped
 
   api:
-    build: 
+    build:
       context: ./backend
-    container_name: sovereing_gateway_api
+      dockerfile: Dockerfile
+    container_name: sovereign_gateway_api
     ports:
-      - "8000:8000"
+      - "${API_PORT:-8000}:8000"
     env_file:
       - ./backend/.env
-    # Montamos la carpeta local a /app en el contenedor para tener Hot-Reload al editar Python
+    environment:
+      CHROMA_HOST: chromadb
+      CHROMA_PORT: "8000"
+      STORAGE_LOCAL_PATH: /app/uploads
+      ENVIRONMENT: development
+      RUN_SEED_ON_START: "true"
+      SQL_ECHO: "false"
+      CORS_ORIGINS: http://localhost:3000,http://127.0.0.1:3000,https://*.vercel.app
     volumes:
       - ./backend:/app
-    environment:
-      - DATABASE_URL=postgresql://chancay_admin:chancay_password@db:5432/sovereign_gateway
-    # Forzamos uvicorn con --reload en local
+      - api_uploads:/app/uploads
     command: ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
     depends_on:
-      - db
-
-  web:
-    build: 
-      context: ./frontend
-      target: dev
-    container_name: sovereing_gateway_web
-    ports:
-      - "3000:3000"
-    env_file:
-      - ./frontend/.env
-    # Montamos la carpeta local para hot-reload de Next.js, 
-    # pero aislamos node_modules para evitar conflictos entre Windows y Linux.
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-      - /app/.next
-    environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
-    command: ["npm", "run", "dev"]
-    depends_on:
-      - api
+      chromadb:
+        condition: service_started
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 15s
+      timeout: 10s
+      retries: 8
+      start_period: 90s
 
 volumes:
-  pgdata:
+  chroma_data:
+  api_uploads:

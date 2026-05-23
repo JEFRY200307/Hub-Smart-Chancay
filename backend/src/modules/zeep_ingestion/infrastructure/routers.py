@@ -21,7 +21,7 @@ def register_source_url(
 ):
     """Registrar un nuevo SourceURL (fuente de verdad)"""
     repo = ZeepIngestionRepository(session)
-    source = SourceURL(url=url, nombre=nombre, sistema_prompt=sistema_prompt)
+    source = SourceURL(url=url, nombre=nombre, system_prompt=sistema_prompt)
     return repo.create_source_url(source)
 
 @router.get("/sources")
