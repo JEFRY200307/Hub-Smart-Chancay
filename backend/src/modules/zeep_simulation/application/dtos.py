@@ -53,6 +53,8 @@ class ProyeccionFiscalDTO(BaseModel):
     ahorro_5_anos_usd: float
     igv_exonerado: bool
     arancel_0: bool
+    condicion_cl_pct: float = 30.0
+    nota_beneficios: str = ""
 
 
 class AlertaDTO(BaseModel):
@@ -71,6 +73,8 @@ class SimulationResponseDTO(BaseModel):
     delta_sector: float
     v_final: float
     beneficio_cl_activo: bool
+    razon_clasificacion: str = ""
+    factores_elegibilidad: list[str] = []
     proyeccion_fiscal: ProyeccionFiscalDTO
     alertas: list[AlertaDTO]
     recomendaciones_agente: list[str]

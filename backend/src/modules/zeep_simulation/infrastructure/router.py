@@ -40,18 +40,4 @@ async def get_simulation_by_session(
     if not record:
         raise ResourceNotFoundException("SimulationRecord", str(session_id))
 
-    return SimulationResponseDTO(
-        id=record.id,
-        session_id=record.session_id,
-        sector=record.sector,
-        clasificacion=record.clasificacion,
-        v_base=float(record.v_base),
-        delta_cl=float(record.delta_cl),
-        delta_sector=float(record.delta_sector),
-        v_final=float(record.v_final),
-        beneficio_cl_activo=record.beneficio_cl_activo,
-        proyeccion_fiscal=record.proyeccion_fiscal,
-        alertas=record.alertas,
-        recomendaciones_agente=record.recomendaciones_agente,
-        created_at=record.created_at.isoformat(),
-    )
+    return svc.record_to_response(record)

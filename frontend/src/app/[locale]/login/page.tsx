@@ -56,7 +56,9 @@ export default async function Login({ params }: { params: Promise<{ locale: stri
             <Suspense fallback={null}>
               <LoginNotice />
             </Suspense>
-            <LoginPanel />
+            <Suspense fallback={<div className="h-48 animate-pulse bg-slate-50 rounded" />}>
+              <LoginPanel />
+            </Suspense>
             <p className="text-center text-[10px] text-slate-400 mt-6 italic leading-relaxed">
               Demo Perú: inversor@hubchancay.pe / HubChancay2025!
               <br />

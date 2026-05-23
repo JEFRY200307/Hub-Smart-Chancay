@@ -157,8 +157,11 @@ export default function OnboardingForm() {
       setFlowValue(FLOW_KEYS.investorProfileId, profile.id);
       setFlowValue(FLOW_KEYS.sector, profile.sector);
       setFlowValue(FLOW_KEYS.empresaNombre, profile.empresa_razon_social);
-      if (up?.url) {
-        /* document stored */
+      if (up?.proyecto_documento_pdf_url || up?.url) {
+        setFlowValue(
+          FLOW_KEYS.projectPdfUrl,
+          up.proyecto_documento_pdf_url || up.url
+        );
       }
       router.push("/onboarding/processing");
     } catch (err) {

@@ -6,6 +6,7 @@ export const FLOW_KEYS = {
   matchId: "hub_match_id",
   sector: "hub_sector",
   empresaNombre: "hub_empresa_nombre",
+  projectPdfUrl: "hub_project_pdf_url",
 } as const;
 
 export function getFlowValue(key: string): string | null {

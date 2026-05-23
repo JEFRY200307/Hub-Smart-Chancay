@@ -29,6 +29,7 @@ def _to_dto(profile) -> InvestorProfileDTO:
         proyecto_nombre=profile.proyecto_nombre,
         proyecto_monto_usd=profile.proyecto_monto_usd,
         sector=profile.sector,
+        proyecto_documento_pdf_url=profile.proyecto_documento_pdf_url,
         created_at=profile.created_at.isoformat(),
     )
 
@@ -106,7 +107,14 @@ async def upload_document(
             status_code=status.HTTP_415_UNSUPPORTED_MEDIA_TYPE,
         )
 
-    url, digest, size = save_upload(content, file.filename or "documento.pdf")
+    url, digest, size = save_upload(
+        content,
+        file.filename or "documento.pdf",
+        subfolder="proyectos",
+        user_id=str(current_user.id),
+        profile_id=str(profile_id),
+        content_type=file.content_type or "application/pdf",
+    )
     doc = svc.attach_document(
         profile_id=profile_id,
         tipo=tipo_documento,
@@ -122,6 +130,7 @@ async def upload_document(
         "tipo_documento": doc.tipo,
         "filename": doc.nombre_archivo,
         "url": doc.url_storage,
+        "proyecto_documento_pdf_url": doc.url_storage,
         "uploaded_at": doc.created_at.isoformat(),
         "descripcion": descripcion,
     }

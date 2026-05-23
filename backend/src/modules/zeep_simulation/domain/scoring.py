@@ -24,6 +24,8 @@ class ScoringResult:
     v_final: Decimal
     beneficio_cl_activo: bool
     clasificacion: str          # ClasificacionElegibilidad
+    razon_clasificacion: str
+    factores_elegibilidad: list[str]
     proyeccion_fiscal: dict
     alertas: list[dict]
     recomendaciones: list[str]
@@ -66,13 +68,26 @@ class SectorScoringStrategy(ABC):
 
     def calcular_proyeccion_fiscal(self, inputs: ScoringInputs, beneficio_cl: bool) -> dict:
         ir_zeep = Decimal("0") if beneficio_cl else self.IR_ESTANDAR_PCT
-        ahorro_anual = inputs.monto_inversion_usd * (self.IR_ESTANDAR_PCT / Decimal("100")) if beneficio_cl else Decimal("0")
+        ahorro_anual = (
+            inputs.monto_inversion_usd * (self.IR_ESTANDAR_PCT / Decimal("100"))
+            if beneficio_cl
+            else Decimal("0")
+        )
         return {
             "ir_estandar_pct": float(self.IR_ESTANDAR_PCT),
             "ir_zeep_pct": float(ir_zeep),
             "ahorro_5_anos_usd": float(ahorro_anual * 5),
             "igv_exonerado": beneficio_cl,
             "arancel_0": beneficio_cl,
+            "condicion_cl_pct": float(self.CL_UMBRAL),
+            "nota_beneficios": (
+                "Beneficios fiscales ZEEP activos (CL ≥ 30%)."
+                if beneficio_cl
+                else (
+                    f"Proyección con régimen general: incremente contenido local a ≥{self.CL_UMBRAL}% "
+                    "para activar 0% IR, exoneración IGV y arancel 0% en equipos."
+                )
+            ),
         }
 
     def clasificar(self, v_final: Decimal) -> str:
@@ -81,6 +96,52 @@ class SectorScoringStrategy(ABC):
         elif v_final >= Decimal("60"):
             return "viable_con_ajustes"
         return "no_elegible"
+
+    def explicar_clasificacion(
+        self,
+        v_base: Decimal,
+        delta_cl: Decimal,
+        delta_sector: Decimal,
+        v_final: Decimal,
+        beneficio_cl: bool,
+        porcentaje_cl: Decimal,
+    ) -> tuple[str, list[str]]:
+        if v_final >= Decimal("80"):
+            razon = (
+                f"Score {v_final:.1f}/100 — umbral de elegibilidad cumplido (≥80 puntos)."
+            )
+        elif v_final >= Decimal("60"):
+            razon = (
+                f"Score {v_final:.1f}/100 — proyecto viable con ajustes (rango 60–79). "
+                "Con mejoras en contenido local o variables sectoriales puede alcanzar elegible."
+            )
+        else:
+            razon = (
+                f"Score {v_final:.1f}/100 — por debajo del mínimo operativo (60). "
+                "Revise monto, empleo, plazo de instalación e integración local."
+            )
+
+        factores = [
+            (
+                f"Desglose: base {v_base:.1f} + contenido local {delta_cl:.1f} "
+                f"+ sector {delta_sector:.1f} = {v_final:.1f} (tope 100)."
+            ),
+        ]
+        if beneficio_cl:
+            factores.append(
+                f"Contenido local {porcentaje_cl}% ≥ 30%: activa 0% IR, IGV exonerado y "
+                "arancel 0% en importación de equipos (Ley N° 32449, régimen ZEEP)."
+            )
+        else:
+            diff = self.CL_UMBRAL - porcentaje_cl
+            factores.append(
+                f"Contenido local {porcentaje_cl}%: faltan {diff:.1f} p.p. para el umbral del 30%. "
+                "Sin ese umbral, IGV y aranceles se calculan con régimen general."
+            )
+        factores.append(
+            "Clasificación por score: ≥80 elegible · 60–79 viable con ajustes · <60 no elegible."
+        )
+        return razon, factores
 
     def score(self, inputs: ScoringInputs, weights: dict) -> ScoringResult:
         v_base = self.calcular_v_base(inputs, weights)
@@ -103,6 +164,10 @@ class SectorScoringStrategy(ABC):
                 f"(ganancia estimada: {self.calcular_delta_cl(self.CL_UMBRAL):.1f} puntos)."
             )
 
+        razon, factores = self.explicar_clasificacion(
+            v_base, delta_cl, delta_sector, v_final, beneficio_cl, inputs.porcentaje_cl
+        )
+
         return ScoringResult(
             v_base=v_base,
             delta_cl=delta_cl,
@@ -110,6 +175,8 @@ class SectorScoringStrategy(ABC):
             v_final=v_final,
             beneficio_cl_activo=beneficio_cl,
             clasificacion=self.clasificar(v_final),
+            razon_clasificacion=razon,
+            factores_elegibilidad=factores,
             proyeccion_fiscal=self.calcular_proyeccion_fiscal(inputs, beneficio_cl),
             alertas=alertas,
             recomendaciones=recomendaciones,

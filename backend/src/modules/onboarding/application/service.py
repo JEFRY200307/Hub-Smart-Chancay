@@ -121,6 +121,7 @@ class OnboardingService:
             proyecto_empleo_indirecto=dto.proyecto_empleo_indirecto,
             proyecto_porcentaje_cl=dto.proyecto_porcentaje_cl,
             proyecto_exportacion_pct=dto.proyecto_exportacion_pct,
+            proyecto_documento_pdf_url=dto.documento_perfil_url,
             sector=dto.sector,
             perfil_tecnico={
                 "area_terreno_m2": float(dto.proyecto_area_terreno_m2)
@@ -173,6 +174,10 @@ class OnboardingService:
                 ProjectService(self.session).link_profile(
                     created.id, user_id, profile.id, dto.session_id
                 )
+                if dto.documento_perfil_url:
+                    ProjectService(self.session).set_document_url(
+                        created.id, user_id, dto.documento_perfil_url
+                    )
         except Exception:
             pass  # migración 002 pendiente en entornos sin investment_projects
 
@@ -194,6 +199,34 @@ class OnboardingService:
         self.session.commit()
         self.session.refresh(profile)
         return profile
+
+    def _sync_documento_pdf_url(self, profile_id: uuid.UUID, url: str) -> None:
+        """Propaga la URL del PDF al perfil inversor y al proyecto vinculado."""
+        profile = self.session.get(InvestorProfile, profile_id)
+        if not profile:
+            return
+        profile.proyecto_documento_pdf_url = url
+        tech = dict(profile.perfil_tecnico or {})
+        tech["documento_perfil_url"] = url
+        profile.perfil_tecnico = tech
+        profile.updated_at = datetime.utcnow()
+        self.session.add(profile)
+
+        try:
+            from src.modules.projects.domain.entities import InvestmentProject
+            from sqlmodel import select
+
+            projects = self.session.exec(
+                select(InvestmentProject).where(
+                    InvestmentProject.investor_profile_id == profile_id
+                )
+            ).all()
+            for proj in projects:
+                proj.documento_perfil_url = url
+                proj.updated_at = datetime.utcnow()
+                self.session.add(proj)
+        except Exception:
+            pass
 
     def attach_document(
         self,
@@ -217,6 +250,8 @@ class OnboardingService:
             subido_por=user_id,
         )
         self.session.add(doc)
+        if tipo in ("perfil_proyecto", "perfil_proyecto_pdf"):
+            self._sync_documento_pdf_url(profile_id, url_storage)
         self.session.commit()
         self.session.refresh(doc)
 

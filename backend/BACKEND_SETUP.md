@@ -17,6 +17,33 @@ En el **SQL Editor**, pega y ejecuta (proyecto vacío o nuevo):
 
 Si ya tienes tablas por `alembic upgrade head`, **no** vuelvas a ejecutar `init-db.sql`.
 
+3. `backend/scripts/supabase_storage_proyectos.sql` — bucket Storage `proyectos` para PDFs de onboarding
+
+### Storage de PDFs de proyecto
+
+En `backend/.env`:
+
+```env
+STORAGE_BACKEND=supabase
+SUPABASE_URL=https://[PROJECT_REF].supabase.co
+SUPABASE_SERVICE_ROLE_KEY=...   # Settings → API → service_role
+SUPABASE_STORAGE_BUCKET=proyectos
+SUPABASE_STORAGE_PUBLIC=true
+```
+
+Migración columna URL:
+
+```bash
+alembic upgrade head   # incluye 004 → investor_profiles.proyecto_documento_pdf_url
+```
+
+Ruta en bucket: `{user_id}/{profile_id}/{uuid}_{archivo}.pdf`  
+La URL pública se guarda en:
+
+- `investor_profiles.proyecto_documento_pdf_url`
+- `investment_projects.documento_perfil_url`
+- `documentos_adjuntos.url_storage`
+
 ## 2. Docker Compose (recomendado)
 
 Desde la raíz del monorepo:

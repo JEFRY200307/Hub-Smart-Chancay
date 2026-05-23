@@ -41,6 +41,13 @@ export default function LoginForm({ labels, redirectTo = "/legal-ai" }: Props) {
   const [error, setError] = useState<string | null>(null);
 
   async function afterAuth(data: LoginResponse, fromRegister: boolean) {
+    const explicitNext =
+      redirectTo && redirectTo !== "/legal-ai" ? redirectTo : null;
+
+    if (explicitNext) {
+      router.push(explicitNext);
+      return;
+    }
     if (fromRegister && profileType === "empresa_inversora") {
       router.push("/onboarding");
       return;

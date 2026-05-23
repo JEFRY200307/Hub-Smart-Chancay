@@ -39,6 +39,9 @@ class InvestorProfile(SQLModel, table=True):
     proyecto_fecha_inicio: Optional[date] = Field(default=None)
     proyecto_duracion_meses: Optional[int] = Field(default=None)
     proyecto_exportacion_pct: Optional[Decimal] = Field(default=None, sa_column=Column(Numeric(5, 2), nullable=True))
+    proyecto_documento_pdf_url: Optional[str] = Field(
+        default=None, sa_column=Column(Text, nullable=True)
+    )
 
     # Perfil técnico (discriminated union serializado como JSONB)
     sector: str = Field(max_length=15)                                   # SectorType enum

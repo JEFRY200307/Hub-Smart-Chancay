@@ -132,6 +132,18 @@ class ProjectService:
         row.investor_profile_id = profile_id
         row.session_id = session_id
         row.estado = "perfil_creado"
+        profile = self._session.get(InvestorProfile, profile_id)
+        if profile and profile.proyecto_documento_pdf_url:
+            row.documento_perfil_url = profile.proyecto_documento_pdf_url
+        self._session.add(row)
+        self._session.commit()
+
+    def set_document_url(
+        self, project_id: uuid.UUID, user_id: uuid.UUID, url: str
+    ) -> None:
+        row = self._get_owned(project_id, user_id)
+        row.documento_perfil_url = url
+        row.updated_at = datetime.utcnow()
         self._session.add(row)
         self._session.commit()
 
@@ -184,5 +196,6 @@ class ProjectService:
             is_active=row.is_active,
             investor_profile_id=row.investor_profile_id,
             session_id=row.session_id,
+            documento_perfil_url=row.documento_perfil_url,
             completion_pct=completion,
         )

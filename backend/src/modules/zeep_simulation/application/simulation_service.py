@@ -57,6 +57,29 @@ class SimulationService:
         self._session.commit()
         self._session.refresh(record)
 
+        return self._to_response_dto(record, result)
+
+    def record_to_response(self, record: SimulationRecord) -> SimulationResponseDTO:
+        """Reconstruye DTO (incl. explicación) desde fila persistida."""
+        strategy = get_strategy(record.sector)
+        inputs = ScoringInputs(
+            monto_inversion_usd=record.monto_inversion_usd,
+            empleo_directo=record.empleo_directo,
+            porcentaje_cl=record.porcentaje_cl,
+            tiempo_instalacion_meses=record.tiempo_instalacion_meses,
+            pais_origen=record.pais_origen,
+            exportacion_pct=record.exportacion_pct,
+            variables_sector=record.variables_sector or {},
+        )
+        result = strategy.score(inputs, self._load_weights(record.sector))
+        return self._to_response_dto(record, result)
+
+    def _to_response_dto(
+        self, record: SimulationRecord, result
+    ) -> SimulationResponseDTO:
+        fiscal = record.proyeccion_fiscal or result.proyeccion_fiscal
+        if "nota_beneficios" not in fiscal:
+            fiscal = {**fiscal, **result.proyeccion_fiscal}
         return SimulationResponseDTO(
             id=record.id,
             session_id=record.session_id,
@@ -67,9 +90,11 @@ class SimulationService:
             delta_sector=float(record.delta_sector),
             v_final=float(record.v_final),
             beneficio_cl_activo=record.beneficio_cl_activo,
-            proyeccion_fiscal=result.proyeccion_fiscal,
-            alertas=result.alertas,
-            recomendaciones_agente=result.recomendaciones,
+            razon_clasificacion=result.razon_clasificacion,
+            factores_elegibilidad=result.factores_elegibilidad,
+            proyeccion_fiscal=fiscal,
+            alertas=record.alertas or result.alertas,
+            recomendaciones_agente=record.recomendaciones_agente or result.recomendaciones,
             created_at=record.created_at.isoformat(),
         )
 

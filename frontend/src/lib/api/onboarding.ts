@@ -11,7 +11,15 @@ export type InvestorProfile = {
   proyecto_nombre: string;
   proyecto_monto_usd: number;
   sector: string;
+  proyecto_documento_pdf_url?: string | null;
   created_at: string;
+};
+
+export type DocumentUploadResponse = {
+  documento_id: string;
+  url: string;
+  proyecto_documento_pdf_url: string;
+  filename: string;
 };
 
 export type RoadmapPhase = {
@@ -64,6 +72,11 @@ export async function uploadDocument(
       body: form,
     }
   );
-  if (!res.ok) throw new Error(`Upload ${res.status}`);
-  return res.json();
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(
+      (err as { detail?: string }).detail || `Error al subir archivo (${res.status})`
+    );
+  }
+  return res.json() as Promise<DocumentUploadResponse>;
 }

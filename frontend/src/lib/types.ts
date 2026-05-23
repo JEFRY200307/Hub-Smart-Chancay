@@ -17,6 +17,8 @@ export type ProyeccionFiscal = {
   ahorro_5_anos_usd: number;
   igv_exonerado: boolean;
   arancel_0: boolean;
+  condicion_cl_pct?: number;
+  nota_beneficios?: string;
 };
 
 export type Alerta = {
@@ -35,6 +37,8 @@ export type SimulationResponse = {
   delta_sector: number;
   v_final: number;
   beneficio_cl_activo: boolean;
+  razon_clasificacion?: string;
+  factores_elegibilidad?: string[];
   proyeccion_fiscal: ProyeccionFiscal;
   alertas: Alerta[];
   recomendaciones_agente: string[];

@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import { Link, useRouter } from "@/navigation";
 import AgentOrchestratorPanel from "@/components/AgentOrchestratorPanel";
 import { getRoadmap } from "@/lib/api/onboarding";
-import { verifyEmailOtp } from "@/lib/api/auth-extended";
-import { login } from "@/lib/auth";
+import { getAccessToken } from "@/lib/auth";
 import { FLOW_KEYS, getInvestorProfileId } from "@/lib/flow";
 import type { AgentId } from "@/lib/agents";
 
@@ -31,11 +30,7 @@ export default function ProcessingFlow() {
   const [roadmap, setRoadmap] = useState<
     { fase: string; estado: string }[] | null
   >(null);
-  const [showAuth, setShowAuth] = useState(false);
-  const [otpEmail, setOtpEmail] = useState("");
-  const [otpCode, setOtpCode] = useState("");
-  const [loginEmail, setLoginEmail] = useState("inversor@hubchancay.pe");
-  const [loginPass, setLoginPass] = useState("HubChancay2025!");
+  const [phase, setPhase] = useState<"running" | "done" | "need_login">("running");
   const [activeAgent, setActiveAgent] = useState<AgentId>("orquestador");
 
   useEffect(() => {
@@ -54,35 +49,32 @@ export default function ProcessingFlow() {
     timers.push(
       setTimeout(async () => {
         const pid = getInvestorProfileId();
-        if (pid) {
+        if (pid && getAccessToken()) {
           try {
             const r = await getRoadmap(pid);
             setRoadmap(r.roadmap);
           } catch {
             setRoadmap([
-              { fase: "Documentación", estado: "pendiente" },
-              { fase: "Matchmaking", estado: "listo" },
-              { fase: "Habilitación ZEEP", estado: "en_progreso" },
+              { fase: "elegibilidad", estado: "completado" },
+              { fase: "validacion_legal", estado: "en_progreso" },
+              { fase: "contratacion", estado: "pendiente" },
+              { fase: "operacion", estado: "pendiente" },
             ]);
           }
         }
-        setShowAuth(true);
+
+        if (getAccessToken()) {
+          setPhase("done");
+          timers.push(
+            setTimeout(() => router.push("/dashboard/matchmaking"), 2500)
+          );
+        } else {
+          setPhase("need_login");
+        }
       }, STEPS.length * 900 + 400)
     );
     return () => timers.forEach(clearTimeout);
-  }, []);
-
-  async function handleLogin(e: React.FormEvent) {
-    e.preventDefault();
-    await login(loginEmail, loginPass);
-    router.push("/dashboard/matchmaking");
-  }
-
-  async function handleOtp(e: React.FormEvent) {
-    e.preventDefault();
-    await verifyEmailOtp(otpEmail, otpCode);
-    router.push("/onboarding");
-  }
+  }, [router]);
 
   return (
     <div className="min-h-screen pt-24 px-8 max-w-5xl mx-auto">
@@ -107,73 +99,51 @@ export default function ProcessingFlow() {
           {roadmap && (
             <div className="mt-8 border-t border-white/20 pt-6">
               <p className="text-xs font-bold uppercase text-[#D7B56D] mb-3">
-                Roadmap API
+                Roadmap de habilitación
               </p>
               {roadmap.map((ph) => (
-                <p key={ph.fase} className="text-sm">
-                  {ph.fase}: <span className="text-[#D7B56D]">{ph.estado}</span>
+                <p key={ph.fase} className="text-sm capitalize">
+                  {ph.fase.replace(/_/g, " ")}:{" "}
+                  <span className="text-[#D7B56D]">{ph.estado}</span>
                 </p>
               ))}
+            </div>
+          )}
+
+          {phase === "done" && (
+            <div className="mt-8 p-4 bg-green-900/40 border border-green-500/40 rounded-xl">
+              <p className="text-green-300 font-bold text-sm">
+                Proyecto registrado correctamente.
+              </p>
+              <p className="text-white/70 text-xs mt-2">
+                Ya tiene sesión activa — redirigiendo al matchmaking…
+              </p>
+              <Link
+                href="/dashboard/matchmaking"
+                className="inline-block mt-4 text-xs font-black uppercase text-[#D7B56D]"
+              >
+                Ir ahora →
+              </Link>
             </div>
           )}
         </div>
       </div>
 
-      {showAuth && (
+      {phase === "need_login" && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl">
-            <h3 className="font-black text-lg uppercase mb-4">
-              Acceso institucional
+          <div className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl text-center">
+            <h3 className="font-black text-lg uppercase mb-2">
+              Sesión requerida
             </h3>
-            <form onSubmit={handleLogin} className="space-y-3 mb-6">
-              <input
-                type="email"
-                value={loginEmail}
-                onChange={(e) => setLoginEmail(e.target.value)}
-                className="w-full border rounded-lg px-3 py-2 text-sm"
-                placeholder="Email"
-              />
-              <input
-                type="password"
-                value={loginPass}
-                onChange={(e) => setLoginPass(e.target.value)}
-                className="w-full border rounded-lg px-3 py-2 text-sm"
-                placeholder="Contraseña"
-              />
-              <button
-                type="submit"
-                className="w-full py-3 bg-[#E31E24] text-white text-xs font-black uppercase rounded-lg"
-              >
-                Iniciar sesión demo
-              </button>
-            </form>
-            <p className="text-xs text-slate-500 mb-2">O verificar OTP empresa:</p>
-            <form onSubmit={handleOtp} className="space-y-2">
-              <input
-                type="email"
-                value={otpEmail}
-                onChange={(e) => setOtpEmail(e.target.value)}
-                className="w-full border rounded-lg px-3 py-2 text-sm"
-                placeholder="Email corporativo"
-              />
-              <input
-                value={otpCode}
-                onChange={(e) => setOtpCode(e.target.value)}
-                className="w-full border rounded-lg px-3 py-2 text-sm"
-                placeholder="Código OTP"
-              />
-              <button
-                type="submit"
-                className="w-full py-2 border-2 border-[#D7B56D] text-xs font-bold uppercase rounded-lg"
-              >
-                Verificar email
-              </button>
-            </form>
+            <p className="text-sm text-slate-600 mb-6">
+              Su sesión expiró o no está iniciada. Inicie sesión para continuar al
+              matchmaking con su proyecto.
+            </p>
             <Link
-              href="/dashboard/matchmaking"
-              className="block text-center mt-4 text-xs font-bold text-[#E31E24]"
+              href={`/login?next=${encodeURIComponent("/dashboard/matchmaking")}`}
+              className="inline-block w-full py-3 bg-[#E31E24] text-white text-xs font-black uppercase rounded-lg"
             >
-              Continuar al matchmaking →
+              Iniciar sesión
             </Link>
           </div>
         </div>

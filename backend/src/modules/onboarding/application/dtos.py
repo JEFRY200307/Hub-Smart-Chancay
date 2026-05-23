@@ -44,6 +44,7 @@ class InvestorProfileDTO(BaseModel):
     proyecto_nombre: str
     proyecto_monto_usd: Decimal
     sector: str
+    proyecto_documento_pdf_url: Optional[str] = None
     created_at: str
 
     model_config = ConfigDict(from_attributes=True)

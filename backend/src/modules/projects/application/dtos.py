@@ -47,6 +47,7 @@ class ProjectResponseDTO(BaseModel):
     is_active: bool
     investor_profile_id: Optional[uuid.UUID]
     session_id: Optional[uuid.UUID]
+    documento_perfil_url: Optional[str] = None
     completion_pct: int = 0
 
     model_config = {"from_attributes": True}
