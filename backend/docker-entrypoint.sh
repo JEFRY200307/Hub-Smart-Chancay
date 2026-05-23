@@ -20,7 +20,13 @@ with engine.connect() as c:
 done
 
 echo "[entrypoint] Ejecutando migraciones Alembic..."
-alembic upgrade head || alembic stamp head
+cd /app || exit 1
+if [ ! -f alembic.ini ] || [ ! -d alembic/versions ]; then
+  echo "[entrypoint] ERROR: falta alembic.ini o carpeta alembic/ en la imagen"
+  ls -la /app
+  exit 1
+fi
+alembic upgrade head
 
 if [ "${RUN_SEED_ON_START:-true}" = "true" ]; then
   echo "[entrypoint] Cargando datos demo (si aplica)..."

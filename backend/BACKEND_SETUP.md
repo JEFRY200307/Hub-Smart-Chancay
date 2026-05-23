@@ -56,7 +56,11 @@ cd backend
 uvicorn src.main:app --reload --port 8000
 ```
 
-Asegura `CHROMA_HOST=localhost` y `CHROMA_PORT=8001` (o levanta solo Chroma: `docker compose up -d chromadb`).
+**Chroma Cloud (recomendado en Render):** define `CHROMA_API_KEY`, `CHROMA_TENANT`, `CHROMA_DATABASE` y `CHROMA_HOST=api.trychroma.com`. No necesitas el contenedor `chromadb` en Docker.
+
+**Local:** deja `CHROMA_API_KEY` vacío y usa `CHROMA_HOST=localhost`, `CHROMA_PORT=8001` (`docker compose up -d chromadb`).
+
+Verifica con `GET /health` → campo `chroma.connected: true`.
 
 ## 5. Verificación
 

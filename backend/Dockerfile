@@ -18,8 +18,9 @@ COPY requirements-core.txt requirements.txt ./
 RUN pip install --upgrade pip \
     && pip install -r requirements-core.txt
 
-# Capa 2: código
-COPY alembic.ini alembic/ ./
+# Capa 2: código (alembic/ debe quedar en /app/alembic, no sueltos en /app)
+COPY alembic.ini ./
+COPY alembic ./alembic
 COPY src/ ./src/
 COPY scripts/ ./scripts/
 COPY docker-entrypoint.sh /docker-entrypoint.sh
@@ -30,4 +31,4 @@ RUN mkdir -p /app/uploads
 EXPOSE 8000
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+CMD ["sh", "-c", "uvicorn src.main:app --host 0.0.0.0 --port ${PORT:-8000}"]

@@ -7,6 +7,7 @@ from pathlib import Path
 
 from src.shared.infrastructure.error_handlers import setup_exception_handlers
 from src.shared.infrastructure.database import check_database_connection
+from src.shared.infrastructure.chroma_client import check_chroma_connection
 
 # Registrar todos los modelos en SQLModel.metadata (necesario para Alembic autogenerate)
 import src.modules.identity.domain.entities           # noqa: F401
@@ -56,11 +57,14 @@ app.mount("/uploads", StaticFiles(directory=str(uploads_path)), name="uploads")
 @app.get("/health", tags=["Sistema"])
 def health_check():
     db = check_database_connection()
+    chroma = check_chroma_connection()
+    ok = db.get("connected") and chroma.get("connected")
     return {
-        "status": "ok" if db.get("connected") else "degraded",
+        "status": "ok" if ok else "degraded",
         "system": "Sovereign Gateway",
         "version": "1.1.0",
         "database": db,
+        "chroma": chroma,
     }
 
 

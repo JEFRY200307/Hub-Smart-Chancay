@@ -16,3 +16,4 @@ tavily-python>=0.3
 requests>=2.31
 pandas>=2.0
 PyPDF2>=3.0
+chromadb>=0.6.0
